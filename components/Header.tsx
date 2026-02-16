@@ -14,9 +14,9 @@ export const Header: React.FC = () => {
         <div className="bg-white border-2 border-black rounded-full pl-6 pr-1.5 py-1.5 shadow-neo flex items-center justify-between w-full md:w-auto md:min-w-[550px] gap-4">
           
           {/* Logo */}
-          <div className="flex flex-col leading-none select-none pl-2">
-            <span className="font-display font-black text-2xl tracking-tighter text-black">PLUS</span>
-            <span className="font-display font-black text-2xl tracking-tighter text-black -mt-2">1ONE</span>
+          <div className="flex flex-col leading-none select-none pl-2 cursor-pointer transition-transform duration-300 ease-out hover:scale-110 origin-center group">
+            <span className="font-display font-black text-2xl tracking-tighter text-black group-hover:text-black">PLUS</span>
+            <span className="font-display font-black text-2xl tracking-tighter text-black -mt-2 group-hover:text-black">1ONE</span>
           </div>
           
           {/* Nav Links - Desktop */}
