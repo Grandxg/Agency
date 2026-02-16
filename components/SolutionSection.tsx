@@ -3,31 +3,32 @@ import { WaitlistForm } from './WaitlistForm';
 
 export const SolutionSection: React.FC = () => {
   return (
-    <section id="waitlist-form" className="relative pt-24 pb-48 px-4 overflow-hidden bg-gradient-to-b from-[#F3E8FF] to-[#E9D5FF]">
+    <section id="contact-form" className="relative pt-24 pb-48 px-4 overflow-hidden bg-gradient-to-b from-[#F3E8FF] to-[#E9D5FF]">
       
       <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-12 text-center mb-12">
         
         <div>
            <h2 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 text-black">
-            Never Go <br />
-            Solo Again
+            Your All-In-One <br />
+            Growth Partner
           </h2>
           <p className="text-lg font-body text-gray-700 max-w-lg mx-auto leading-relaxed">
-            Whether it's grabbing coffee, watching a movie, or exploring a new hotspot, 
-            PlusOne ensures your plans never fall through.
+            Organic Marketing. Video Editing. Website Building. Custom CRM Development.
+            <br />
+            <span className="font-bold text-[#2E0249]">We execute, you grow.</span>
           </p>
         </div>
 
         <div className="w-full">
-            <h3 className="text-3xl font-display font-bold mb-4 text-[#2E0249]">Join the PlusOne Waitlist</h3>
+            <h3 className="text-3xl font-display font-bold mb-4 text-[#2E0249]">Start Your Project</h3>
             <p className="text-sm font-body text-gray-600 mb-8 max-w-md mx-auto">
-                Be first to know when we launch. Help us match you better by sharing a few details.
+                Tell us what you need. We'll get back to you with a strategy within 24 hours.
             </p>
             <WaitlistForm />
         </div>
       </div>
 
-      {/* Unique Smooth Curve Divider (Matches Footer Color #2E0249) */}
+      {/* Unique Smooth Curve Divider (Opposite: Hill rising up) */}
       <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
         <svg 
             className="relative block w-[calc(100%+1.3px)] h-[100px] md:h-[180px]" 
@@ -37,7 +38,7 @@ export const SolutionSection: React.FC = () => {
             preserveAspectRatio="none"
         >
              <path 
-                d="M0,0 C300,100 900,100 1200,0 V120 H0 V0 Z" 
+                d="M0,120 C320,0 880,0 1200,120 H0 Z" 
                 className="fill-[#2E0249]"
             ></path>
         </svg>

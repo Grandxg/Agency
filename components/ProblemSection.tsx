@@ -1,6 +1,6 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Video, Phone, ChevronLeft, MoreVertical } from 'lucide-react';
+import { ChevronLeft, MoreVertical } from 'lucide-react';
 
 const ChatBubble = ({ text, isUser, delay, inView }: { text: string; isUser: boolean; delay: number; inView: boolean }) => {
   return (
@@ -17,8 +17,8 @@ const ChatBubble = ({ text, isUser, delay, inView }: { text: string; isUser: boo
       `}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      {isUser && <span className="text-[10px] text-gray-300 block mb-1 font-bold tracking-wide">YOU</span>}
-      {!isUser && <span className="text-[10px] text-gray-500 block mb-1 font-bold tracking-wide">SATWIK</span>}
+      {isUser && <span className="text-[10px] text-gray-300 block mb-1 font-bold tracking-wide">AGENCY</span>}
+      {!isUser && <span className="text-[10px] text-gray-500 block mb-1 font-bold tracking-wide">CLIENT</span>}
       {text}
     </div>
   );
@@ -37,15 +37,14 @@ export const ProblemSection: React.FC = () => {
         {/* Text Content */}
         <div className="md:w-1/2 text-center md:text-left z-10">
           <h2 className="text-5xl md:text-7xl font-display font-black leading-[0.9] mb-8 text-black tracking-tight">
-            DON'T BAIL <br />
-            ON YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B4FE] to-[#8B5CF6] drop-shadow-sm">PLANS</span> <br />
-            JUST BECAUSE <br />
-            THEY DID.
+            STOP <br />
+            SHOUTING <br />
+            INTO THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B4FE] to-[#8B5CF6] drop-shadow-sm">VOID.</span>
           </h2>
           <p className="text-xl font-body text-gray-600 max-w-lg leading-relaxed">
-            We've all been there: plans set, energy high... then the group chat fizzles out. 
+            Great products fail without distribution. Great marketing fails without solid tech.
             <br /><br />
-            <strong className="text-black">PlusOne</strong> helps you go anyway, meet new people, and keep the hype alive.
+            <strong className="text-black">GrothView</strong> handles both. We create organic content that converts and build the tech (Web & CRM) to sustain it.
           </p>
         </div>
 
@@ -61,8 +60,8 @@ export const ProblemSection: React.FC = () => {
               <div className="flex items-center justify-between mt-4">
                 <ChevronLeft size={24} className="text-black" />
                 <div className="flex flex-col items-center">
-                   <span className="font-display font-bold text-lg leading-none">Friends Forever</span>
-                   <span className="text-[10px] text-gray-500 font-body">4 members</span>
+                   <span className="font-display font-bold text-lg leading-none">GrothView Team</span>
+                   <span className="text-[10px] text-gray-500 font-body">Replies Instantly</span>
                 </div>
                 <MoreVertical size={24} className="text-black" />
               </div>
@@ -73,26 +72,26 @@ export const ProblemSection: React.FC = () => {
               <ChatBubble 
                 inView={inView} 
                 delay={200} 
-                isUser={true} 
-                text="GUYSSS! The gig is tomorrow! We still on? 🎸" 
+                isUser={false} 
+                text="We need a custom CRM and a video launch strategy. 📉" 
               />
               <ChatBubble 
                 inView={inView} 
                 delay={800} 
-                isUser={false} 
-                text="Ah sorry bro, caught up with work deadlines... 😓" 
+                isUser={true} 
+                text="On it. We'll build the CRM and shoot the reels this week. 🚀" 
               />
                <ChatBubble 
                 inView={inView} 
                 delay={1600} 
                 isUser={false} 
-                text="Yeah same, won't make it. Have fun though!" 
+                text="What about PR? We need press coverage." 
               />
                <ChatBubble 
                 inView={inView} 
                 delay={2400} 
                 isUser={true} 
-                text="Seriously? This is the 3rd time... 😤" 
+                text="Handled. Our PR network is ready to go." 
               />
             </div>
             
@@ -109,7 +108,7 @@ export const ProblemSection: React.FC = () => {
 
       </div>
 
-      {/* Unique Smooth Curve Divider (Matches Next Section Color #F3E8FF) */}
+      {/* Unique Smooth Curve Divider (Matches SolutionSection gradient start #F3E8FF) */}
       <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
         <svg 
             className="relative block w-[calc(100%+1.3px)] h-[100px] md:h-[180px]" 
@@ -119,7 +118,7 @@ export const ProblemSection: React.FC = () => {
             preserveAspectRatio="none"
         >
              <path 
-                d="M0,0 C300,100 900,100 1200,0 V120 H0 V0 Z" 
+                d="M0,120 C320,0 880,0 1200,120 H0 Z" 
                 className="fill-[#F3E8FF]"
             ></path>
         </svg>

@@ -2,8 +2,8 @@ import React from 'react';
 import { Button } from './ui/Button';
 
 export const Header: React.FC = () => {
-  const scrollToWaitlist = () => {
-    document.getElementById('waitlist-form')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToContact = () => {
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -15,20 +15,20 @@ export const Header: React.FC = () => {
           
           {/* Logo */}
           <div className="flex flex-col leading-none select-none pl-2 cursor-pointer transition-transform duration-300 ease-out hover:scale-110 origin-center group">
-            <span className="font-display font-black text-2xl tracking-tighter text-black group-hover:text-black">PLUS</span>
-            <span className="font-display font-black text-2xl tracking-tighter text-black -mt-2 group-hover:text-black">1ONE</span>
+            <span className="font-display font-black text-2xl tracking-tighter text-black group-hover:text-black">GROTH</span>
+            <span className="font-display font-black text-2xl tracking-tighter text-black -mt-2 group-hover:text-black">VIEW</span>
           </div>
           
           {/* Nav Links - Desktop */}
           <nav className="hidden md:flex gap-8 font-display font-bold text-sm text-black">
-            <a href="#" className="hover:text-[#D8B4FE] transition-colors">Home</a>
-            <a href="#" className="hover:text-[#D8B4FE] transition-colors">About</a>
-            <a href="#" className="hover:text-[#D8B4FE] transition-colors">Plus one</a>
+            <a href="#" className="hover:text-[#D8B4FE] transition-colors">Marketing</a>
+            <a href="#" className="hover:text-[#D8B4FE] transition-colors">Development</a>
+            <a href="#" className="hover:text-[#D8B4FE] transition-colors">Agency</a>
           </nav>
 
           {/* Action Button */}
-          <Button size="md" onClick={scrollToWaitlist} className="whitespace-nowrap bg-[#D8B4FE] hover:bg-[#cba0f9] text-base py-2.5 px-6">
-            Join The Waitlist
+          <Button size="md" onClick={scrollToContact} className="whitespace-nowrap bg-[#D8B4FE] hover:bg-[#cba0f9] text-base py-2.5 px-6">
+            Get a Proposal
           </Button>
 
         </div>

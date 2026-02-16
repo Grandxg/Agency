@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Sparkles, Mail, ArrowUpRight } from 'lucide-react';
+import { Star, Sparkles, Mail, ArrowUpRight, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 
 const FooterSectionHeader = ({ icon: Icon, title }: { icon: any, title: string }) => (
   <div className="inline-flex items-center gap-2 mb-6">
@@ -29,14 +29,14 @@ export const Footer: React.FC = () => {
         {/* Brand Column */}
         <div className="lg:w-1/3">
            <div className="flex flex-col leading-none mb-8 select-none">
-            <span className="font-display font-black text-6xl tracking-tighter text-white">PLUS</span>
-            <span className="font-display font-black text-6xl tracking-tighter text-white -mt-3">1ONE</span>
+            <span className="font-display font-black text-6xl tracking-tighter text-white">GROTH</span>
+            <span className="font-display font-black text-6xl tracking-tighter text-white -mt-3">VIEW</span>
           </div>
           <p className="text-white/80 font-body text-base leading-relaxed max-w-sm mb-8">
-            Welcoming, fun, and imaginative. A playful space for finding the right companion for real-world experiences.
+            Your partner for Organic Marketing, PR, Video Editing, and High-Performance Web & App Development.
           </p>
           <div className="inline-block bg-[#FDE047] text-black font-bold font-display px-4 py-1 rounded-full text-xs uppercase tracking-widest border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-            Beta Access
+            Open for Business
           </div>
         </div>
 
@@ -45,48 +45,39 @@ export const Footer: React.FC = () => {
           
           {/* Quick Links */}
           <div className="flex flex-col">
-            <FooterSectionHeader icon={Star} title="Menu" />
+            <FooterSectionHeader icon={Star} title="Services" />
             <div className="flex flex-col">
-               <FooterLink text="Home" />
-               <FooterLink text="About Us" />
-               <FooterLink text="Join Waitlist" />
+               <FooterLink text="Marketing & PR" />
+               <FooterLink text="Video Editing" />
+               <FooterLink text="Web Development" />
             </div>
           </div>
 
           {/* Social */}
           <div className="flex flex-col">
-            <FooterSectionHeader icon={Sparkles} title="Social" />
+            <FooterSectionHeader icon={Sparkles} title="Follow Us" />
             <div className="flex flex-col gap-3">
                 <a href="#" className="flex items-center gap-3 text-white/80 hover:text-[#FDE047] transition-colors group">
-                    <span className="w-2 h-2 rounded-full bg-white/30 group-hover:bg-[#FDE047] transition-colors"></span>
+                    <Instagram size={20} className="group-hover:text-black" />
                     Instagram
                 </a>
                 <a href="#" className="flex items-center gap-3 text-white/80 hover:text-[#FDE047] transition-colors group">
-                    <span className="w-2 h-2 rounded-full bg-white/30 group-hover:bg-[#FDE047] transition-colors"></span>
-                    Twitter
+                    <Linkedin size={20} className="group-hover:text-black" />
+                    LinkedIn
                 </a>
                  <a href="#" className="flex items-center gap-3 text-white/80 hover:text-[#FDE047] transition-colors group">
-                    <span className="w-2 h-2 rounded-full bg-white/30 group-hover:bg-[#FDE047] transition-colors"></span>
-                    TikTok
+                    <Twitter size={20} className="group-hover:text-black" />
+                    Twitter
                 </a>
             </div>
           </div>
 
-          {/* Newsletter */}
+          {/* Contact Info */}
           <div className="flex flex-col">
-             <FooterSectionHeader icon={Mail} title="Updates" />
+             <FooterSectionHeader icon={Mail} title="Get in touch" />
              <div className="flex flex-col gap-3">
-               <p className="text-xs text-white/60 mb-1">Get early access updates directly.</p>
-               <div className="relative">
-                <input 
-                    type="email" 
-                    placeholder="you@email.com"
-                    className="w-full pl-4 pr-12 py-3.5 rounded-xl border-2 border-white/20 bg-white/5 text-white placeholder-white/30 font-body text-sm outline-none focus:ring-2 focus:ring-[#FDE047] focus:border-transparent transition-all"
-                />
-                <button className="absolute right-2 top-2 bottom-2 bg-[#FDE047] text-black rounded-lg px-3 hover:bg-white transition-colors flex items-center justify-center">
-                    <ArrowUpRight size={18} />
-                </button>
-               </div>
+               <p className="text-sm text-white/60 mb-1">projects@grothview.com</p>
+               <p className="text-sm text-white/60">New York, NY</p>
              </div>
           </div>
 
@@ -94,7 +85,7 @@ export const Footer: React.FC = () => {
       </div>
       
       <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 font-body gap-4">
-        <span>© 2026 PlusOne Inc.</span>
+        <span>© 2026 GrothView Agency.</span>
         <div className="flex gap-6">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
