@@ -5,7 +5,7 @@ import { Plane, Guitar, Tent, Palette, Trophy, Coffee, Ticket, Music, Camera, Bi
 
 const FloatingIcon = ({ Icon, top, left, delay, size = 32, rotate = 0 }: any) => (
   <div 
-    className="absolute text-[#D8B4FE] opacity-40 animate-float pointer-events-none select-none z-0"
+    className="absolute animate-float pointer-events-none select-none z-0"
     style={{ 
       top, 
       left, 
@@ -13,7 +13,10 @@ const FloatingIcon = ({ Icon, top, left, delay, size = 32, rotate = 0 }: any) =>
       transform: `rotate(${rotate}deg)` 
     }}
   >
-    <Icon size={size} strokeWidth={1.5} />
+    {/* Outline Cutout Style */}
+    <div className="text-[#D8B4FE] opacity-60 filter drop-shadow-[1px_1px_0px_rgba(0,0,0,0.1)]">
+        <Icon size={size} strokeWidth={2} />
+    </div>
   </div>
 );
 
@@ -21,22 +24,22 @@ const BackgroundIcons = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
        {/* Left Side Distribution */}
-       <FloatingIcon Icon={Plane} top="12%" left="4%" delay="0s" rotate={-15} size={36} />
-       <FloatingIcon Icon={Guitar} top="32%" left="10%" delay="2s" rotate={10} size={40} />
-       <FloatingIcon Icon={Tent} top="55%" left="5%" delay="1s" rotate={-5} size={34} />
-       <FloatingIcon Icon={Camera} top="78%" left="12%" delay="3s" rotate={15} size={38} />
-       <FloatingIcon Icon={Coffee} top="15%" left="22%" delay="4s" rotate={20} size={30} />
-       <FloatingIcon Icon={Ticket} top="45%" left="18%" delay="1.5s" rotate={-10} size={32} />
-       <FloatingIcon Icon={Map} top="90%" left="6%" delay="0.5s" rotate={-20} size={36} />
+       <FloatingIcon Icon={Plane} top="12%" left="4%" delay="0s" rotate={-15} size={42} />
+       <FloatingIcon Icon={Guitar} top="32%" left="10%" delay="2s" rotate={10} size={48} />
+       <FloatingIcon Icon={Tent} top="55%" left="5%" delay="1s" rotate={-5} size={38} />
+       <FloatingIcon Icon={Camera} top="78%" left="12%" delay="3s" rotate={15} size={44} />
+       <FloatingIcon Icon={Coffee} top="15%" left="22%" delay="4s" rotate={20} size={36} />
+       <FloatingIcon Icon={Ticket} top="45%" left="18%" delay="1.5s" rotate={-10} size={40} />
+       <FloatingIcon Icon={Map} top="90%" left="6%" delay="0.5s" rotate={-20} size={42} />
 
        {/* Right Side Distribution */}
-       <FloatingIcon Icon={Palette} top="18%" left="88%" delay="1s" rotate={10} size={38} />
-       <FloatingIcon Icon={Trophy} top="40%" left="92%" delay="3s" rotate={-15} size={36} />
-       <FloatingIcon Icon={Music} top="68%" left="85%" delay="2s" rotate={5} size={34} />
-       <FloatingIcon Icon={Bike} top="8%" left="78%" delay="0.5s" rotate={-20} size={40} />
-       <FloatingIcon Icon={Utensils} top="55%" left="75%" delay="4s" rotate={15} size={32} />
-       <FloatingIcon Icon={Gamepad} top="85%" left="90%" delay="2.5s" rotate={-5} size={36} />
-       <FloatingIcon Icon={Sun} top="88%" left="70%" delay="1.2s" rotate={10} size={38} />
+       <FloatingIcon Icon={Palette} top="18%" left="88%" delay="1s" rotate={10} size={44} />
+       <FloatingIcon Icon={Trophy} top="40%" left="92%" delay="3s" rotate={-15} size={42} />
+       <FloatingIcon Icon={Music} top="68%" left="85%" delay="2s" rotate={5} size={40} />
+       <FloatingIcon Icon={Bike} top="8%" left="78%" delay="0.5s" rotate={-20} size={48} />
+       <FloatingIcon Icon={Utensils} top="55%" left="75%" delay="4s" rotate={15} size={38} />
+       <FloatingIcon Icon={Gamepad} top="85%" left="90%" delay="2.5s" rotate={-5} size={44} />
+       <FloatingIcon Icon={Sun} top="88%" left="70%" delay="1.2s" rotate={10} size={42} />
     </div>
   );
 };
@@ -57,7 +60,7 @@ export const Hero: React.FC = () => {
       <div className="z-10 w-full max-w-5xl mx-auto flex flex-col items-center animate-slide-up relative">
         <Ticker />
         
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-black leading-[0.9] tracking-tighter mb-8 text-black drop-shadow-sm">
+        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-black leading-[0.9] tracking-tighter mb-8 text-black drop-shadow-sm select-none">
           No <br className="md:hidden"/>
           More <br />
           Cancelled <br />
