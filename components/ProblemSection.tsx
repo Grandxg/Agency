@@ -1,6 +1,6 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Video, Phone } from 'lucide-react';
+import { Video, Phone, ChevronLeft, MoreVertical } from 'lucide-react';
 
 const ChatBubble = ({ text, isUser, delay, inView }: { text: string; isUser: boolean; delay: number; inView: boolean }) => {
   return (
@@ -9,16 +9,16 @@ const ChatBubble = ({ text, isUser, delay, inView }: { text: string; isUser: boo
         max-w-[85%] p-4 rounded-2xl text-sm font-body font-medium shadow-sm mb-3 relative
         transform transition-all duration-700 ease-out
         ${isUser 
-          ? 'bg-[#2E0249] text-white ml-auto rounded-br-none' 
-          : 'bg-[#E9D5FF] text-black mr-auto rounded-bl-none'}
+          ? 'bg-[#4C1D95] text-white ml-auto rounded-br-sm' 
+          : 'bg-gray-100 border border-gray-200 text-black mr-auto rounded-bl-sm'}
         ${inView 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-10'}
+          ? 'opacity-100 translate-y-0 scale-100' 
+          : 'opacity-0 translate-y-10 scale-95'}
       `}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      {isUser && <span className="text-[10px] text-gray-300 block mb-1">You</span>}
-      {!isUser && <span className="text-[10px] text-gray-600 block mb-1">Satwik</span>}
+      {isUser && <span className="text-[10px] text-gray-300 block mb-1 font-bold tracking-wide">YOU</span>}
+      {!isUser && <span className="text-[10px] text-gray-500 block mb-1 font-bold tracking-wide">SATWIK</span>}
       {text}
     </div>
   );
@@ -27,66 +27,86 @@ const ChatBubble = ({ text, isUser, delay, inView }: { text: string; isUser: boo
 export const ProblemSection: React.FC = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.2,
+    threshold: 0.3,
   });
 
   return (
-    <section className="py-20 px-4 bg-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col items-center text-center mb-16">
-        <h2 className="text-4xl md:text-6xl font-display font-bold leading-tight mb-6 text-black">
-          Don't bail on <br />
-          your plans because <br />
-          your friends did!
-        </h2>
-        <p className="text-lg font-body text-gray-600 max-w-2xl">
-          We've all been there, plans set, energy high... then the group chat fizzles. We help you still go, meet new people, and keep the hype alive.
-        </p>
-      </div>
+    <section className="py-24 px-4 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24">
+        
+        {/* Text Content */}
+        <div className="md:w-1/2 text-center md:text-left z-10">
+          <h2 className="text-5xl md:text-7xl font-display font-black leading-[0.9] mb-8 text-black tracking-tight">
+            DON'T BAIL <br />
+            ON YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B4FE] to-[#8B5CF6] drop-shadow-sm">PLANS</span> <br />
+            JUST BECAUSE <br />
+            THEY DID.
+          </h2>
+          <p className="text-xl font-body text-gray-600 max-w-lg leading-relaxed">
+            We've all been there: plans set, energy high... then the group chat fizzles out. 
+            <br /><br />
+            <strong className="text-black">PlusOne</strong> helps you go anyway, meet new people, and keep the hype alive.
+          </p>
+        </div>
 
-      <div className="flex justify-center w-full" ref={ref}>
-        {/* iPhone Frame */}
-        <div className="relative w-full max-w-[360px] border-[4px] border-black rounded-[3.5rem] bg-white shadow-neo-lg overflow-hidden h-[600px] flex flex-col">
-          
-          {/* Status Bar / Dynamic Island */}
-          <div className="bg-[#E9D5FF] h-32 w-full pt-4 px-6 flex flex-col shrink-0 border-b border-black/5 relative">
-            <div className="absolute top-4 left-0 right-0 mx-auto w-28 h-8 bg-black rounded-full z-20 flex justify-end items-center pr-2">
-               <div className="w-1.5 h-1.5 rounded-full bg-green-500/50"></div>
+        {/* Phone Mockup */}
+        <div className="md:w-1/2 flex justify-center md:justify-end" ref={ref}>
+          <div className="relative w-full max-w-[340px] border-[4px] border-black rounded-[3rem] bg-white shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] overflow-hidden h-[640px] flex flex-col transform transition-transform duration-500 hover:-translate-y-2">
+            
+            {/* Header */}
+            <div className="bg-[#F3E8FF] p-6 pb-4 border-b-2 border-black/5 pt-12 relative z-10">
+              {/* Notch */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-7 bg-black rounded-b-2xl"></div>
+
+              <div className="flex items-center justify-between mt-4">
+                <ChevronLeft size={24} className="text-black" />
+                <div className="flex flex-col items-center">
+                   <span className="font-display font-bold text-lg leading-none">Friends Forever</span>
+                   <span className="text-[10px] text-gray-500 font-body">4 members</span>
+                </div>
+                <MoreVertical size={24} className="text-black" />
+              </div>
+            </div>
+
+            {/* Chat Area */}
+            <div className="flex-1 bg-white p-5 flex flex-col justify-end pb-8 gap-2 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+              <ChatBubble 
+                inView={inView} 
+                delay={200} 
+                isUser={true} 
+                text="GUYSSS! The gig is tomorrow! We still on? 🎸" 
+              />
+              <ChatBubble 
+                inView={inView} 
+                delay={800} 
+                isUser={false} 
+                text="Ah sorry bro, caught up with work deadlines... 😓" 
+              />
+               <ChatBubble 
+                inView={inView} 
+                delay={1600} 
+                isUser={false} 
+                text="Yeah same, won't make it. Have fun though!" 
+              />
+               <ChatBubble 
+                inView={inView} 
+                delay={2400} 
+                isUser={true} 
+                text="Seriously? This is the 3rd time... 😤" 
+              />
             </div>
             
-            {/* Header Content */}
-            <div className="mt-10 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#2E0249] flex items-center justify-center text-white font-bold border border-black">
-                  
-                </div>
-                <span className="font-display font-bold text-lg">Friends Forever</span>
-              </div>
-              <div className="flex gap-4 text-[#2E0249]">
-                <Video size={24} strokeWidth={2} />
-                <Phone size={22} strokeWidth={2} />
-              </div>
+            {/* Input Area Mockup */}
+            <div className="p-3 bg-gray-50 border-t border-gray-100 flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-gray-200"></div>
+                <div className="flex-1 h-10 rounded-full bg-white border border-gray-200"></div>
             </div>
-          </div>
 
-          {/* Chat Area */}
-          <div className="flex-1 bg-white p-4 flex flex-col justify-end pb-8">
-            <ChatBubble 
-              inView={inView} 
-              delay={200} 
-              isUser={true} 
-              text="GUYSSS! Come on yaar this is the 5th time we are canceling 😤" 
-            />
-            <ChatBubble 
-              inView={inView} 
-              delay={1000} 
-              isUser={false} 
-              text="Bro what can I do, the manager is not approving my leave. 🥲" 
-            />
+            {/* Home Indicator */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-black rounded-full z-20"></div>
           </div>
-          
-          {/* Home Indicator */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-black rounded-full"></div>
         </div>
+
       </div>
     </section>
   );

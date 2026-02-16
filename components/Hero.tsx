@@ -1,44 +1,36 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { Ticker } from './Ticker';
-import { Plane, Guitar, Tent, Palette, Trophy, Coffee, Ticket, Music, Bike, Gamepad, Map } from 'lucide-react';
+import { Plane, Guitar, Palette, Ticket, Bike, Gamepad, Map, Music, Coffee, Sun } from 'lucide-react';
 
-const FloatingIcon = ({ Icon, top, left, delay, size = 32, rotate = 0 }: any) => (
+const GiantIcon = ({ Icon, top, left, right, bottom, rotate, delay, size = 180 }: any) => (
   <div 
-    className="absolute animate-float pointer-events-none select-none z-0"
+    className="absolute text-[#E9D5FF] opacity-30 animate-float pointer-events-none select-none z-0 mix-blend-multiply"
     style={{ 
-      top, 
-      left, 
-      animationDelay: delay,
-      transform: `rotate(${rotate}deg)` 
+      top, left, right, bottom, 
+      transform: `rotate(${rotate}deg)`,
+      animationDelay: delay 
     }}
   >
-    {/* Outline Cutout Style - Larger sizes, cleaner look */}
-    <div className="text-[#D8B4FE] opacity-40 transition-opacity duration-500">
-        <Icon size={size} strokeWidth={1.5} />
-    </div>
+    <Icon strokeWidth={1.2} size={size} />
   </div>
 );
 
 const BackgroundIcons = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-       {/* Left Side Distribution */}
-       <FloatingIcon Icon={Plane} top="5%" left="2%" delay="0s" rotate={-15} size={140} />
-       <FloatingIcon Icon={Guitar} top="30%" left="8%" delay="2s" rotate={10} size={120} />
-       <FloatingIcon Icon={Tent} top="65%" left="4%" delay="1s" rotate={-5} size={110} />
-       <FloatingIcon Icon={Coffee} top="12%" left="25%" delay="4s" rotate={20} size={90} />
+       {/* Abstract composition of giant icons */}
+       <GiantIcon Icon={Plane} top="-5%" left="-5%" rotate={15} delay="0s" size={280} />
+       <GiantIcon Icon={Guitar} top="15%" right="-8%" rotate={-15} delay="2s" size={300} />
        
-       {/* Bottom Left */}
-       <FloatingIcon Icon={Ticket} top="82%" left="15%" delay="1.5s" rotate={-10} size={85} />
-       <FloatingIcon Icon={Map} top="88%" left="3%" delay="0.5s" rotate={-20} size={100} />
-
-       {/* Right Side Distribution */}
-       <FloatingIcon Icon={Palette} top="15%" left="88%" delay="1s" rotate={10} size={130} />
-       <FloatingIcon Icon={Trophy} top="42%" left="85%" delay="3s" rotate={-15} size={115} />
-       <FloatingIcon Icon={Music} top="70%" left="82%" delay="2s" rotate={5} size={100} />
-       <FloatingIcon Icon={Bike} top="2%" left="70%" delay="0.5s" rotate={-20} size={125} />
-       <FloatingIcon Icon={Gamepad} top="85%" left="88%" delay="2.5s" rotate={-5} size={110} />
+       <GiantIcon Icon={Ticket} bottom="10%" left="-5%" rotate={-20} delay="1s" size={240} />
+       <GiantIcon Icon={Bike} bottom="-5%" right="10%" rotate={10} delay="3s" size={260} />
+       
+       <GiantIcon Icon={Coffee} top="40%" left="10%" rotate={-10} delay="4s" size={120} />
+       <GiantIcon Icon={Palette} top="25%" right="15%" rotate={20} delay="1.5s" size={140} />
+       
+       <GiantIcon Icon={Map} bottom="25%" left="20%" rotate={-5} delay="2.5s" size={100} />
+       <GiantIcon Icon={Sun} top="10%" left="40%" rotate={0} delay="5s" size={80} />
     </div>
   );
 };
@@ -49,29 +41,35 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col items-center justify-center text-center px-4 pt-32 pb-20 overflow-hidden bg-[#FDFBFF]">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] pointer-events-none"></div>
+    <section className="relative min-h-[95vh] flex flex-col items-center justify-center text-center px-4 pt-32 pb-24 overflow-hidden bg-[#FDFBFF]">
+      {/* Subtle Noise Texture overlay */}
+      <div className="absolute inset-0 opacity-[0.4] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none mix-blend-overlay"></div>
+      
       <BackgroundIcons />
       
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#F3E8FF]/40 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#F3E8FF]/60 pointer-events-none"></div>
 
-      <div className="z-10 w-full max-w-5xl mx-auto flex flex-col items-center animate-slide-up relative">
+      <div className="z-10 w-full max-w-6xl mx-auto flex flex-col items-center animate-slide-up relative">
         <Ticker />
         
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-black leading-[0.9] tracking-tighter mb-8 text-black drop-shadow-sm select-none">
-          No <br className="md:hidden"/>
-          More <br />
-          Cancelled <br />
-          Plans
+        <h1 className="text-7xl md:text-9xl lg:text-[11rem] font-display font-black leading-[0.85] tracking-tighter mb-10 text-black drop-shadow-sm select-none mix-blend-darken">
+          NO MORE <br />
+          CANCELLED <br />
+          PLANS
         </h1>
 
-        <p className="text-lg md:text-2xl font-body text-gray-500 max-w-xl mb-12 leading-relaxed font-medium">
-          From treks to cafes to gigs to sports, <br className="hidden md:block" />
-          find a buddy for every plan!
-        </p>
+        <div className="relative bg-white/80 backdrop-blur-sm px-8 py-6 rounded-3xl border-2 border-black/5 shadow-sm mb-12 max-w-2xl">
+          <p className="text-xl md:text-2xl font-body text-gray-800 font-medium leading-relaxed">
+            From treks to cafes to gigs to sports, <br className="hidden md:block" />
+            <span className="text-[#9333ea] font-bold">find a buddy</span> for every plan!
+          </p>
+        </div>
 
-        <Button size="lg" onClick={scrollToWaitlist} className="px-10 py-5 text-xl rounded-full bg-[#D8B4FE] border-2 border-black shadow-neo hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all">
+        <Button 
+          size="lg" 
+          onClick={scrollToWaitlist} 
+          className="px-12 py-6 text-2xl rounded-full bg-[#D8B4FE] border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 transition-all"
+        >
           Join the waitlist
         </Button>
       </div>
