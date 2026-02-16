@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { Ticker } from './Ticker';
-import { Plane, Guitar, Tent, Palette, Trophy, Coffee, Ticket, Music, Camera, Bike, Utensils, Gamepad, Map, Sun } from 'lucide-react';
+import { Plane, Guitar, Tent, Palette, Trophy, Coffee, Ticket, Music, Bike, Gamepad, Map } from 'lucide-react';
 
 const FloatingIcon = ({ Icon, top, left, delay, size = 32, rotate = 0 }: any) => (
   <div 
@@ -13,9 +13,9 @@ const FloatingIcon = ({ Icon, top, left, delay, size = 32, rotate = 0 }: any) =>
       transform: `rotate(${rotate}deg)` 
     }}
   >
-    {/* Outline Cutout Style */}
-    <div className="text-[#D8B4FE] opacity-60 filter drop-shadow-[1px_1px_0px_rgba(0,0,0,0.1)]">
-        <Icon size={size} strokeWidth={2} />
+    {/* Outline Cutout Style - Larger sizes, cleaner look */}
+    <div className="text-[#D8B4FE] opacity-40 transition-opacity duration-500">
+        <Icon size={size} strokeWidth={1.5} />
     </div>
   </div>
 );
@@ -24,22 +24,21 @@ const BackgroundIcons = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
        {/* Left Side Distribution */}
-       <FloatingIcon Icon={Plane} top="12%" left="4%" delay="0s" rotate={-15} size={42} />
-       <FloatingIcon Icon={Guitar} top="32%" left="10%" delay="2s" rotate={10} size={48} />
-       <FloatingIcon Icon={Tent} top="55%" left="5%" delay="1s" rotate={-5} size={38} />
-       <FloatingIcon Icon={Camera} top="78%" left="12%" delay="3s" rotate={15} size={44} />
-       <FloatingIcon Icon={Coffee} top="15%" left="22%" delay="4s" rotate={20} size={36} />
-       <FloatingIcon Icon={Ticket} top="45%" left="18%" delay="1.5s" rotate={-10} size={40} />
-       <FloatingIcon Icon={Map} top="90%" left="6%" delay="0.5s" rotate={-20} size={42} />
+       <FloatingIcon Icon={Plane} top="5%" left="2%" delay="0s" rotate={-15} size={140} />
+       <FloatingIcon Icon={Guitar} top="30%" left="8%" delay="2s" rotate={10} size={120} />
+       <FloatingIcon Icon={Tent} top="65%" left="4%" delay="1s" rotate={-5} size={110} />
+       <FloatingIcon Icon={Coffee} top="12%" left="25%" delay="4s" rotate={20} size={90} />
+       
+       {/* Bottom Left */}
+       <FloatingIcon Icon={Ticket} top="82%" left="15%" delay="1.5s" rotate={-10} size={85} />
+       <FloatingIcon Icon={Map} top="88%" left="3%" delay="0.5s" rotate={-20} size={100} />
 
        {/* Right Side Distribution */}
-       <FloatingIcon Icon={Palette} top="18%" left="88%" delay="1s" rotate={10} size={44} />
-       <FloatingIcon Icon={Trophy} top="40%" left="92%" delay="3s" rotate={-15} size={42} />
-       <FloatingIcon Icon={Music} top="68%" left="85%" delay="2s" rotate={5} size={40} />
-       <FloatingIcon Icon={Bike} top="8%" left="78%" delay="0.5s" rotate={-20} size={48} />
-       <FloatingIcon Icon={Utensils} top="55%" left="75%" delay="4s" rotate={15} size={38} />
-       <FloatingIcon Icon={Gamepad} top="85%" left="90%" delay="2.5s" rotate={-5} size={44} />
-       <FloatingIcon Icon={Sun} top="88%" left="70%" delay="1.2s" rotate={10} size={42} />
+       <FloatingIcon Icon={Palette} top="15%" left="88%" delay="1s" rotate={10} size={130} />
+       <FloatingIcon Icon={Trophy} top="42%" left="85%" delay="3s" rotate={-15} size={115} />
+       <FloatingIcon Icon={Music} top="70%" left="82%" delay="2s" rotate={5} size={100} />
+       <FloatingIcon Icon={Bike} top="2%" left="70%" delay="0.5s" rotate={-20} size={125} />
+       <FloatingIcon Icon={Gamepad} top="85%" left="88%" delay="2.5s" rotate={-5} size={110} />
     </div>
   );
 };
