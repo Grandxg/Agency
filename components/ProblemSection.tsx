@@ -31,8 +31,8 @@ export const ProblemSection: React.FC = () => {
   });
 
   return (
-    <section className="py-24 px-4 bg-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24">
+    <section className="pt-24 pb-48 px-4 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 relative z-10">
         
         {/* Text Content */}
         <div className="md:w-1/2 text-center md:text-left z-10">
@@ -107,6 +107,22 @@ export const ProblemSection: React.FC = () => {
           </div>
         </div>
 
+      </div>
+
+      {/* Unique Smooth Curve Divider (Matches Next Section Color #F3E8FF) */}
+      <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
+        <svg 
+            className="relative block w-[calc(100%+1.3px)] h-[100px] md:h-[180px]" 
+            data-name="Layer 1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 1200 120" 
+            preserveAspectRatio="none"
+        >
+             <path 
+                d="M0,0 C300,100 900,100 1200,0 V120 H0 V0 Z" 
+                className="fill-[#F3E8FF]"
+            ></path>
+        </svg>
       </div>
     </section>
   );
