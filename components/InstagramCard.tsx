@@ -1,0 +1,64 @@
+import React from 'react';
+import { Eye, TrendingUp } from 'lucide-react';
+
+export const InstagramCard = ({ 
+  url, 
+  title,
+  views,
+  growth
+}: { 
+  url: string; 
+  title: string;
+  views: string;
+  growth: string;
+}) => {
+  // Extract the reel ID from the URL
+  // Matches /reel/ID/ or /p/ID/
+  const match = url.match(/\/(?:reel|p)\/([a-zA-Z0-9_-]+)/);
+  const reelId = match ? match[1] : '';
+  const embedUrl = `https://www.instagram.com/reel/${reelId}/embed/?autoplay=1&muted=1`;
+
+  return (
+    <div 
+      className="group relative h-[750px] w-full rounded-3xl overflow-hidden border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col"
+    >
+      {/* Iframe Container */}
+      <div className="flex-grow relative bg-black w-full overflow-hidden">
+        <iframe 
+          src={embedUrl}
+          className="w-full h-[calc(100%+140px)] absolute top-0 left-0"
+          frameBorder="0"
+          scrolling="no"
+          sandbox="allow-scripts allow-same-origin allow-presentation"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          title={title}
+        />
+        {/* Top Overlay to block profile/header clicks */}
+        <div className="absolute top-0 left-0 w-full h-32 z-20 bg-transparent cursor-default" />
+        {/* Bottom Overlay to block footer/logo clicks */}
+        <div className="absolute bottom-0 left-0 w-full h-32 z-20 bg-transparent cursor-default" />
+      </div>
+
+      {/* Stats Footer */}
+      <div className="h-20 bg-white border-t-[3px] border-black flex items-center justify-between px-6 relative z-20 shrink-0">
+        <div className="flex items-center gap-3">
+            <div className="bg-[#F3E8FF] p-2.5 rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                <Eye size={20} className="text-black" />
+            </div>
+            <div className="flex flex-col">
+                <span className="font-display font-bold text-xl leading-none text-black">{views}</span>
+                <span className="text-[11px] text-gray-500 font-bold uppercase tracking-wider mt-1">Total Views</span>
+            </div>
+        </div>
+        
+        <div className="flex flex-col items-end">
+             <div className="flex items-center gap-1.5 text-green-600 bg-green-100 px-2 py-1 rounded-lg border border-green-200 mb-1">
+                <TrendingUp size={14} />
+                <span className="font-bold text-xs font-mono">{growth}</span>
+            </div>
+            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Engagement</span>
+        </div>
+      </div>
+    </div>
+  );
+};
