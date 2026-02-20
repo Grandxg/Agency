@@ -1,5 +1,6 @@
 import React from 'react';
 import { InstagramCard } from './InstagramCard';
+import { YouTubeCard } from './YouTubeCard';
 
 export const ReelsSection: React.FC = () => {
   return (
@@ -22,23 +23,55 @@ export const ReelsSection: React.FC = () => {
             </div>
         </div>
 
-        {/* Updated Grid to 2 columns for the 2 provided reels */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {/* Updated Grid to show all transferred reels */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            {/* Reel 1 */}
+            {/* YouTube Short 1 */}
+            <YouTubeCard 
+                title="Viral Short 1"
+                url="https://www.youtube.com/shorts/ifR5xU33QvE"
+                views="5.1M"
+                growth="+620%"
+            />
+
+            {/* YouTube Short 2 */}
+            <YouTubeCard 
+                title="Viral Short 2"
+                url="https://www.youtube.com/shorts/r0APzj_ZChw"
+                views="3.4M"
+                growth="+410%"
+            />
+
+             {/* YouTube Short 3 */}
+             <YouTubeCard 
+                title="Viral Short 3"
+                url="https://www.youtube.com/shorts/D2izfV2zayk"
+                views="2.9M"
+                growth="+350%"
+            />
+
+            {/* Instagram Reel 1 */}
+            <InstagramCard 
+                title="Viral Reel 1"
+                url="https://www.instagram.com/reel/DRMq8XDDNSh/?igsh=YTl6dGFmMWptcTVk"
+                views="4.8M"
+                growth="+580%"
+            />
+
+            {/* Instagram Reel 2 */}
+            <InstagramCard 
+                title="Viral Reel 2"
+                url="https://www.instagram.com/reel/DSfKce2ktBj/?igsh=bHYwNXc2aHpkZWlm"
+                views="1.7M"
+                growth="+250%"
+            />
+
+            {/* Previous Reel 1 */}
             <InstagramCard 
                 title="Manipulation Dark Reel 1"
                 url="https://www.instagram.com/manipulation_dark/reel/DN360KNk713/?hl=en"
                 views="1.2M"
                 growth="+124%"
-            />
-            
-            {/* Reel 2 */}
-            <InstagramCard 
-                title="Manipulation Dark Reel 2"
-                url="https://www.instagram.com/manipulation_dark/reel/DPGqgKviMF7/?hl=en"
-                views="850K"
-                growth="+89%"
             />
 
         </div>
