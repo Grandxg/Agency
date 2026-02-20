@@ -4,12 +4,10 @@ import { Eye, TrendingUp } from 'lucide-react';
 export const InstagramCard = ({ 
   url, 
   title,
-  views,
   growth
 }: { 
   url: string; 
   title: string;
-  views: string;
   growth: string;
 }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
@@ -59,23 +57,13 @@ export const InstagramCard = ({
       </div>
 
       {/* Stats Footer */}
-      <div className="h-20 bg-white border-t-[3px] border-black flex items-center justify-between px-6 relative z-20 shrink-0">
-        <div className="flex items-center gap-3">
-            <div className="bg-[#F3E8FF] p-2.5 rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                <Eye size={20} className="text-black" />
+      <div className="h-20 bg-white border-t-[3px] border-black flex items-center justify-center px-6 relative z-20 shrink-0">
+        <div className="flex flex-col items-center">
+             <div className="flex items-center gap-1.5 text-green-600 bg-green-100 px-3 py-1.5 rounded-lg border border-green-200 mb-1">
+                <TrendingUp size={16} />
+                <span className="font-bold text-sm font-mono">{growth}</span>
             </div>
-            <div className="flex flex-col">
-                <span className="font-display font-bold text-xl leading-none text-black">{views}</span>
-                <span className="text-[11px] text-gray-500 font-bold uppercase tracking-wider mt-1">Total Views</span>
-            </div>
-        </div>
-        
-        <div className="flex flex-col items-end">
-             <div className="flex items-center gap-1.5 text-green-600 bg-green-100 px-2 py-1 rounded-lg border border-green-200 mb-1">
-                <TrendingUp size={14} />
-                <span className="font-bold text-xs font-mono">{growth}</span>
-            </div>
-            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Engagement</span>
+            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Engagement Growth</span>
         </div>
       </div>
     </div>

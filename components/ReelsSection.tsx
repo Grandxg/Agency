@@ -30,7 +30,6 @@ export const ReelsSection: React.FC = () => {
             <YouTubeCard 
                 title="Viral Short 1"
                 url="https://www.youtube.com/shorts/ifR5xU33QvE"
-                views="5.1M"
                 growth="+620%"
             />
 
@@ -38,7 +37,6 @@ export const ReelsSection: React.FC = () => {
             <YouTubeCard 
                 title="Viral Short 2"
                 url="https://www.youtube.com/shorts/r0APzj_ZChw"
-                views="3.4M"
                 growth="+410%"
             />
 
@@ -46,7 +44,6 @@ export const ReelsSection: React.FC = () => {
              <YouTubeCard 
                 title="Viral Short 3"
                 url="https://www.youtube.com/shorts/D2izfV2zayk"
-                views="2.9M"
                 growth="+350%"
             />
 
@@ -54,7 +51,6 @@ export const ReelsSection: React.FC = () => {
             <InstagramCard 
                 title="Viral Reel 1"
                 url="https://www.instagram.com/reel/DRMq8XDDNSh/?igsh=YTl6dGFmMWptcTVk"
-                views="4.8M"
                 growth="+580%"
             />
 
@@ -62,7 +58,6 @@ export const ReelsSection: React.FC = () => {
             <InstagramCard 
                 title="Viral Reel 2"
                 url="https://www.instagram.com/reel/DSfKce2ktBj/?igsh=bHYwNXc2aHpkZWlm"
-                views="1.7M"
                 growth="+250%"
             />
 
@@ -70,7 +65,6 @@ export const ReelsSection: React.FC = () => {
             <InstagramCard 
                 title="Manipulation Dark Reel 1"
                 url="https://www.instagram.com/manipulation_dark/reel/DN360KNk713/?hl=en"
-                views="1.2M"
                 growth="+124%"
             />
 
