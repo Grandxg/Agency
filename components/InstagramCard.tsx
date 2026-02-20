@@ -60,7 +60,6 @@ export const InstagramCard = ({
       <div className="h-20 bg-white border-t-[3px] border-black flex items-center justify-center px-6 relative z-20 shrink-0">
         <div className="flex flex-col items-center">
              <div className="flex items-center gap-1.5 text-green-600 bg-green-100 px-3 py-1.5 rounded-lg border border-green-200 mb-1">
-                <TrendingUp size={16} />
                 <span className="font-bold text-sm font-mono">{growth}</span>
             </div>
             <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Engagement Growth</span>
