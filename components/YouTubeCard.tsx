@@ -1,7 +1,7 @@
 import React from 'react';
 import { Eye, TrendingUp } from 'lucide-react';
 
-export const InstagramCard = ({ 
+export const YouTubeCard = ({ 
   url, 
   title,
   views,
@@ -12,11 +12,12 @@ export const InstagramCard = ({
   views: string;
   growth: string;
 }) => {
-  // Extract the reel ID from the URL
-  // Matches /reel/ID/ or /p/ID/
-  const match = url.match(/\/(?:reel|p)\/([a-zA-Z0-9_-]+)/);
-  const reelId = match ? match[1] : '';
-  const embedUrl = `https://www.instagram.com/reel/${reelId}/embed/?autoplay=0&muted=0`;
+  // Extract the video ID from the URL
+  // Matches /shorts/ID
+  const match = url.match(/\/shorts\/([a-zA-Z0-9_-]+)/);
+  const videoId = match ? match[1] : '';
+  // YouTube embed URL for Shorts style
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&loop=1&playlist=${videoId}&rel=0&showinfo=0&modestbranding=1`;
 
   return (
     <div 
@@ -26,16 +27,20 @@ export const InstagramCard = ({
       <div className="flex-grow relative bg-black w-full overflow-hidden">
         <iframe 
           src={embedUrl}
-          className="w-full h-[calc(100%+200px)] absolute top-0 left-0"
+          className="w-full h-full absolute inset-0 object-cover"
           frameBorder="0"
-          scrolling="no"
-          sandbox="allow-scripts allow-same-origin allow-presentation"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
           title={title}
         />
-        {/* Top Overlay to block profile/header clicks */}
+        {/* Transparent Overlay to prevent clicks/redirects if needed, 
+            but YouTube embeds are usually fine to interact with for play/pause.
+            Adding overlays to match the "no redirect" request style if desired, 
+            but YouTube clicks usually pause/play unless clicking the title.
+        */}
+        {/* Top Overlay to block title clicks */}
         <div className="absolute top-0 left-0 w-full h-32 z-20 bg-transparent cursor-default" />
-        {/* Bottom Overlay to block footer/logo clicks */}
+        {/* Bottom Overlay to block footer clicks if any */}
         <div className="absolute bottom-0 left-0 w-full h-40 z-20 bg-transparent cursor-default" />
       </div>
 

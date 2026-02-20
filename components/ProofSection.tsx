@@ -1,5 +1,6 @@
 import React from 'react';
 import { InstagramCard } from './InstagramCard';
+import { YouTubeCard } from './YouTubeCard';
 
 export const ProofSection: React.FC = () => {
   return (
@@ -20,44 +21,44 @@ export const ProofSection: React.FC = () => {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-0">
             
-            {/* Reel 1 */}
-            <InstagramCard 
-                title="Viral Edit 1"
-                url="https://www.instagram.com/manipulation_dark/reel/DRrLd4EATTB/?hl=en"
-                views="4.2M"
-                growth="+600%"
+            {/* YouTube Short 1 */}
+            <YouTubeCard 
+                title="Viral Short 1"
+                url="https://www.youtube.com/shorts/ifR5xU33QvE"
+                views="5.1M"
+                growth="+620%"
             />
 
-            {/* Reel 2 */}
-            <InstagramCard 
-                title="Viral Edit 2"
-                url="https://www.instagram.com/manipulation_dark/reel/DQgfnTbCIZ7/?hl=en"
-                views="3.8M"
-                growth="+450%"
+            {/* YouTube Short 2 */}
+            <YouTubeCard 
+                title="Viral Short 2"
+                url="https://www.youtube.com/shorts/r0APzj_ZChw"
+                views="3.4M"
+                growth="+410%"
             />
 
-             {/* Reel 3 */}
-             <InstagramCard 
-                title="Viral Edit 3"
-                url="https://www.instagram.com/manipulation_dark/reel/DPrumAcCApF/?hl=en"
-                views="2.1M"
-                growth="+380%"
+             {/* YouTube Short 3 */}
+             <YouTubeCard 
+                title="Viral Short 3"
+                url="https://www.youtube.com/shorts/D2izfV2zayk"
+                views="2.9M"
+                growth="+350%"
             />
 
-            {/* Reel 4 */}
+            {/* Instagram Reel 1 */}
             <InstagramCard 
-                title="Viral Edit 4"
-                url="https://www.instagram.com/manipulation_dark/reel/DPCf0jmCEDx/?hl=en"
-                views="5.5M"
-                growth="+720%"
+                title="Viral Reel 1"
+                url="https://www.instagram.com/reel/DRMq8XDDNSh/?igsh=YTl6dGFmMWptcTVk"
+                views="4.8M"
+                growth="+580%"
             />
 
-            {/* Reel 5 */}
+            {/* Instagram Reel 2 */}
             <InstagramCard 
-                title="Viral Edit 5"
-                url="https://www.instagram.com/manipulation_dark/reel/DO3YBDTAbx_/?hl=en"
-                views="1.9M"
-                growth="+290%"
+                title="Viral Reel 2"
+                url="https://www.instagram.com/reel/DSfKce2ktBj/?igsh=bHYwNXc2aHpkZWlm"
+                views="1.7M"
+                growth="+250%"
             />
         </div>
       </div>
