@@ -6,7 +6,7 @@ const DELAY_MS = 1000;
 // LocalStorage key for persistence
 const DB_KEY = 'plusone_waitlist_db';
 
-export const submitToWaitlist = async (name: string, age: number, phoneNumber: string): Promise<WaitlistResponse> => {
+export const submitToWaitlist = async (name: string, email: string, message: string): Promise<WaitlistResponse> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       try {
@@ -15,14 +15,16 @@ export const submitToWaitlist = async (name: string, age: number, phoneNumber: s
           resolve({ success: false, message: 'Name must be at least 2 characters.' });
           return;
         }
-        if (!age || age < 18 || age > 100) {
-          resolve({ success: false, message: 'You must be between 18 and 100 years old.' });
+        
+        // Basic email regex for validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+          resolve({ success: false, message: 'Please enter a valid email address.' });
           return;
         }
-        // Basic phone regex for validation
-        const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
-        if (!phoneNumber || !phoneRegex.test(phoneNumber)) {
-          resolve({ success: false, message: 'Please enter a valid phone number.' });
+
+        if (!message || message.length < 5) {
+          resolve({ success: false, message: 'Message must be at least 5 characters.' });
           return;
         }
 
@@ -33,8 +35,8 @@ export const submitToWaitlist = async (name: string, age: number, phoneNumber: s
         const newEntry: WaitlistEntry = {
           id: currentData.length + 1,
           name,
-          age,
-          phoneNumber,
+          email,
+          message,
           timestamp: new Date().toISOString(),
         };
 

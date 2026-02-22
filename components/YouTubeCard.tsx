@@ -1,23 +1,26 @@
 import React from 'react';
-import { Eye, TrendingUp } from 'lucide-react';
 
 export const YouTubeCard = ({ 
   url, 
   title,
-  growth
+  growth,
+  thumbnail
 }: { 
   url: string; 
   title: string;
   growth: string;
+  thumbnail?: string;
 }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
+  const [imgError, setImgError] = React.useState(false);
 
   // Extract the video ID from the URL
   const match = url.match(/\/shorts\/([a-zA-Z0-9_-]+)/);
   const videoId = match ? match[1] : '';
   // YouTube embed URL for Shorts style
   const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${videoId}&rel=0&showinfo=0&modestbranding=1`;
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  // Use provided thumbnail or fallback to YouTube maxresdefault
+  const thumbnailUrl = thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
     <div 
@@ -26,13 +29,22 @@ export const YouTubeCard = ({
       {/* Iframe/Poster Container */}
       <div className="flex-grow relative bg-black w-full overflow-hidden cursor-pointer" onClick={() => setIsLoaded(true)}>
         {!isLoaded ? (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
-            <img 
-              src={thumbnailUrl} 
-              alt={title} 
-              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-              referrerPolicy="no-referrer"
-            />
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-gradient-to-br from-red-900 to-black">
+            {!imgError ? (
+              <img 
+                src={thumbnailUrl} 
+                alt={title} 
+                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                referrerPolicy="no-referrer"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+               // Fallback if image fails to load
+               <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-red-900 via-red-950 to-black opacity-90 flex flex-col items-center justify-center">
+                  <div className="text-white/20 font-display font-bold text-6xl rotate-[-15deg] select-none">SHORT</div>
+               </div>
+            )}
+
             <div className="relative z-40 bg-white/90 p-5 rounded-full border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform">
               <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-black border-b-[12px] border-b-transparent ml-1" />
             </div>

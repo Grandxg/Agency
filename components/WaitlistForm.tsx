@@ -24,7 +24,7 @@ export const WaitlistForm: React.FC = () => {
     setError(null);
 
     // Reusing the API service but passing 0 for age for now as we transition
-    const response = await submitToWaitlist(formData.name, 99, formData.email);
+    const response = await submitToWaitlist(formData.name, formData.email, formData.message);
 
     setLoading(false);
     if (response.success) {

@@ -47,9 +47,11 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col">
             <FooterSectionHeader icon={Star} title="Services" />
             <div className="flex flex-col">
-               <FooterLink text="Marketing & PR" />
-               <FooterLink text="Video Editing" />
                <FooterLink text="Web Development" />
+               <FooterLink text="Custom CRM Software" />
+               <FooterLink text="Web Application" />
+               <FooterLink text="Video Editing" />
+               <FooterLink text="Marketing PR Team" />
             </div>
           </div>
 
@@ -76,8 +78,8 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col">
              <FooterSectionHeader icon={Mail} title="Get in touch" />
              <div className="flex flex-col gap-3">
-               <p className="text-sm text-white/60 mb-1">projects@grothview.com</p>
-               <p className="text-sm text-white/60">New York, NY</p>
+               <a href="mailto:srujanmahankar@gmail.com" className="text-sm text-white/60 mb-1 hover:text-[#FDE047] transition-colors">srujanmahankar@gmail.com</a>
+               <a href="tel:+918888701750" className="text-sm text-white/60 hover:text-[#FDE047] transition-colors">+91 88887 01750</a>
              </div>
           </div>
 

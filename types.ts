@@ -1,8 +1,8 @@
 export interface WaitlistEntry {
   id: number;
   name: string;
-  age: number;
-  phoneNumber: string;
+  email: string;
+  message: string;
   timestamp: string;
 }
 

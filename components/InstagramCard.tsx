@@ -1,22 +1,25 @@
 import React from 'react';
-import { Eye, TrendingUp } from 'lucide-react';
 
 export const InstagramCard = ({ 
   url, 
   title,
-  growth
+  growth,
+  thumbnail
 }: { 
   url: string; 
   title: string;
   growth: string;
+  thumbnail?: string;
 }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
+  const [imgError, setImgError] = React.useState(false);
   
   // Extract the reel ID from the URL
   const match = url.match(/\/(?:reel|p)\/([a-zA-Z0-9_-]+)/);
   const reelId = match ? match[1] : '';
   const embedUrl = `https://www.instagram.com/reel/${reelId}/embed/?autoplay=1&muted=0`;
-  const thumbnailUrl = `https://www.instagram.com/p/${reelId}/media/?size=l`;
+  // Use provided thumbnail or fallback to Instagram media URL
+  const thumbnailUrl = thumbnail || `https://www.instagram.com/p/${reelId}/media/?size=l`;
 
   return (
     <div 
@@ -25,13 +28,22 @@ export const InstagramCard = ({
       {/* Iframe/Poster Container */}
       <div className="flex-grow relative bg-black w-full overflow-hidden cursor-pointer" onClick={() => setIsLoaded(true)}>
         {!isLoaded ? (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
-            <img 
-              src={thumbnailUrl} 
-              alt={title} 
-              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-              referrerPolicy="no-referrer"
-            />
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-gradient-to-br from-purple-900 to-black">
+            {!imgError ? (
+              <img 
+                src={thumbnailUrl} 
+                alt={title} 
+                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                referrerPolicy="no-referrer"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              // Fallback if image fails to load - Nice gradient pattern
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-900 via-purple-900 to-black opacity-90 flex flex-col items-center justify-center">
+                 <div className="text-white/20 font-display font-bold text-6xl rotate-[-15deg] select-none">REEL</div>
+              </div>
+            )}
+            
             <div className="relative z-40 bg-white/90 p-5 rounded-full border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform">
               <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-black border-b-[12px] border-b-transparent ml-1" />
             </div>
