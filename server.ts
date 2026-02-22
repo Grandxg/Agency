@@ -3,19 +3,19 @@ import { createServer as createViteServer } from "vite";
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import cors from 'cors';
-import bodyParser from 'body-parser';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_FILE = path.join(__dirname, 'proposals.json');
+// Use process.cwd() for reliable path resolution in container
+const ROOT_DIR = process.cwd();
+const DATA_FILE = path.join(ROOT_DIR, 'proposals.json');
 
-// Ensure data file exists
-if (!fs.existsSync(DATA_FILE)) {
-  try {
+// Ensure data file exists (non-blocking, safe)
+try {
+  if (!fs.existsSync(DATA_FILE)) {
     fs.writeFileSync(DATA_FILE, JSON.stringify([]));
-  } catch (err) {
-    console.error("Failed to create proposals.json:", err);
+    console.log("Created proposals.json at", DATA_FILE);
   }
+} catch (err) {
+  console.error("Failed to check/create proposals.json:", err);
 }
 
 async function startServer() {
@@ -23,14 +23,13 @@ async function startServer() {
     const app = express();
     const PORT = 3000;
 
-    console.log("Initializing server...");
+    console.log("Starting server initialization...");
 
-    // Middleware
-    app.use(cors());
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+    // Built-in middleware
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
 
-    // Request logging middleware
+    // Request logging
     app.use((req, res, next) => {
       console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
       next();
@@ -44,7 +43,7 @@ async function startServer() {
       res.json({ status: "ok", timestamp: new Date().toISOString() });
     });
     
-    // Get all proposals (Admin only)
+    // Get all proposals
     apiRouter.get("/proposals", (req, res) => {
       try {
         if (fs.existsSync(DATA_FILE)) {
@@ -66,7 +65,7 @@ async function startServer() {
         const { name, email, phoneNumber, message } = req.body;
         
         if (!name || !email || !phoneNumber || !message) {
-          console.error("Missing fields in proposal:", { name, email, phoneNumber, message });
+          console.error("Missing fields:", { name, email, phoneNumber, message });
           return res.status(400).json({ success: false, message: "All fields are required" });
         }
 
@@ -94,7 +93,7 @@ async function startServer() {
         currentData.push(newEntry);
         fs.writeFileSync(DATA_FILE, JSON.stringify(currentData, null, 2));
 
-        console.log("Proposal saved successfully:", newEntry.id);
+        console.log("Proposal saved:", newEntry.id);
         res.json({ success: true, message: "Proposal submitted successfully", data: newEntry });
       } catch (error) {
         console.error("Error saving proposal:", error);
@@ -116,11 +115,23 @@ async function startServer() {
     // Mount API Router
     app.use("/api", apiRouter);
 
-    // API 404 Handler - Prevent falling through to Vite
+    // API 404 Handler
     app.use("/api/*", (req, res) => {
       console.log(`404 API Request: ${req.method} ${req.originalUrl}`);
       res.status(404).json({ success: false, message: "API endpoint not found" });
     });
+
+    // Vite middleware
+    if (process.env.NODE_ENV !== "production") {
+      console.log("Setting up Vite middleware...");
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      });
+      app.use(vite.middlewares);
+    } else {
+      app.use(express.static(path.join(ROOT_DIR, 'dist')));
+    }
 
     // Global Error Handler
     app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -130,25 +141,18 @@ async function startServer() {
       }
     });
 
-    // Vite middleware for development
-    if (process.env.NODE_ENV !== "production") {
-      const vite = await createViteServer({
-        server: { middlewareMode: true },
-        appType: "spa",
-      });
-      app.use(vite.middlewares);
-    } else {
-      // Production static file serving (if built)
-      app.use(express.static(path.join(__dirname, 'dist')));
-    }
-
     app.listen(PORT, "0.0.0.0", () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
   } catch (error) {
     console.error("Failed to start server:", error);
-    process.exit(1);
+    // Do not exit, just log. Exiting kills the container.
   }
 }
+
+// Handle unhandled rejections to prevent crash
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
 
 startServer();
