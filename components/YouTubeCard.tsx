@@ -1,15 +1,18 @@
 import React from 'react';
+import { AestheticThumbnail, ThumbnailVariant } from './AestheticThumbnail';
 
 export const YouTubeCard = ({ 
   url, 
   title,
   growth,
-  thumbnail
+  thumbnail,
+  variant
 }: { 
   url: string; 
   title: string;
   growth: string;
   thumbnail?: string;
+  variant?: ThumbnailVariant;
 }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [imgError, setImgError] = React.useState(false);
@@ -18,7 +21,7 @@ export const YouTubeCard = ({
   const match = url.match(/\/shorts\/([a-zA-Z0-9_-]+)/);
   const videoId = match ? match[1] : '';
   // YouTube embed URL for Shorts style
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${videoId}&rel=0&showinfo=0&modestbranding=1`;
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${videoId}&rel=0&showinfo=0&modestbranding=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`;
   // Use provided thumbnail or fallback to YouTube maxresdefault
   const thumbnailUrl = thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
@@ -29,25 +32,34 @@ export const YouTubeCard = ({
       {/* Iframe/Poster Container */}
       <div className="flex-grow relative bg-black w-full overflow-hidden cursor-pointer" onClick={() => setIsLoaded(true)}>
         {!isLoaded ? (
-          <div className="absolute inset-0 z-30 flex items-center justify-center bg-gradient-to-br from-red-900 to-black">
-            {!imgError ? (
-              <img 
-                src={thumbnailUrl} 
-                alt={title} 
-                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                referrerPolicy="no-referrer"
-                onError={() => setImgError(true)}
-              />
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-[#2E0249]">
+            {variant ? (
+              <AestheticThumbnail variant={variant} title={title} />
+            ) : !imgError ? (
+              <>
+                <img 
+                  src={thumbnailUrl} 
+                  alt={title} 
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity grayscale-[20%]"
+                  referrerPolicy="no-referrer"
+                  onError={() => setImgError(true)}
+                />
+                {/* Professional Purple Tint Overlay */}
+                <div className="absolute inset-0 bg-[#4C1D95]/30 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+                
+                {/* Play Button Overlay for Image Thumbnails */}
+                <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
+                   <div className="bg-white/20 backdrop-blur-sm border border-white/30 p-6 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1" />
+                   </div>
+                </div>
+              </>
             ) : (
                // Fallback if image fails to load
-               <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-red-900 via-red-950 to-black opacity-90 flex flex-col items-center justify-center">
-                  <div className="text-white/20 font-display font-bold text-6xl rotate-[-15deg] select-none">SHORT</div>
-               </div>
+               <AestheticThumbnail variant="purple-haze" title={title} />
             )}
-
-            <div className="relative z-40 bg-white/90 p-5 rounded-full border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform">
-              <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-black border-b-[12px] border-b-transparent ml-1" />
-            </div>
+            
             {/* Overlay to prevent any hover info from iframe if it were there */}
             <div className="absolute inset-0 z-30 bg-transparent" />
           </div>
@@ -61,9 +73,9 @@ export const YouTubeCard = ({
               allowFullScreen
               title={title}
             />
-            {/* Aggressive overlays to block title/logo clicks */}
-            <div className="absolute top-0 left-0 w-full h-32 z-20 bg-transparent cursor-default" />
-            <div className="absolute bottom-0 left-0 w-full h-40 z-20 bg-transparent cursor-default" />
+            {/* Overlays to block title/logo clicks but allow center play click if needed */}
+            <div className="absolute top-0 left-0 w-full h-24 z-20 bg-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-32 z-20 bg-transparent pointer-events-none" />
           </>
         )}
       </div>

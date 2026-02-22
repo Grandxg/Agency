@@ -31,7 +31,7 @@ export const ReelsSection: React.FC = () => {
                 title="Viral Short 1"
                 url="https://www.youtube.com/shorts/ifR5xU33QvE"
                 growth="+620%"
-                thumbnail="https://picsum.photos/seed/viral1/400/700"
+                variant="purple-haze"
             />
 
             {/* YouTube Short 2 */}
@@ -39,7 +39,7 @@ export const ReelsSection: React.FC = () => {
                 title="Viral Short 2"
                 url="https://www.youtube.com/shorts/r0APzj_ZChw"
                 growth="+410%"
-                thumbnail="https://picsum.photos/seed/viral2/400/700"
+                variant="cyber-grid"
             />
 
              {/* YouTube Short 3 */}
@@ -47,7 +47,7 @@ export const ReelsSection: React.FC = () => {
                 title="Viral Short 3"
                 url="https://www.youtube.com/shorts/D2izfV2zayk"
                 growth="+350%"
-                thumbnail="https://picsum.photos/seed/viral3/400/700"
+                variant="neo-pop"
             />
 
             {/* Instagram Reel 1 */}
@@ -55,7 +55,7 @@ export const ReelsSection: React.FC = () => {
                 title="Viral Reel 1"
                 url="https://www.instagram.com/reel/DRMq8XDDNSh/?igsh=YTl6dGFmMWptcTVk"
                 growth="+580%"
-                thumbnail="https://picsum.photos/seed/reel1/400/700"
+                variant="soft-mesh"
             />
 
             {/* Instagram Reel 2 */}
@@ -63,7 +63,7 @@ export const ReelsSection: React.FC = () => {
                 title="Viral Reel 2"
                 url="https://www.instagram.com/reel/DSfKce2ktBj/?igsh=bHYwNXc2aHpkZWlm"
                 growth="+250%"
-                thumbnail="https://picsum.photos/seed/reel2/400/700"
+                variant="dark-matter"
             />
 
             {/* Previous Reel 1 */}
@@ -71,7 +71,7 @@ export const ReelsSection: React.FC = () => {
                 title="Manipulation Dark Reel 1"
                 url="https://www.instagram.com/manipulation_dark/reel/DN360KNk713/?hl=en"
                 growth="+124%"
-                thumbnail="https://picsum.photos/seed/dark1/400/700"
+                variant="retro-wave"
             />
 
         </div>
