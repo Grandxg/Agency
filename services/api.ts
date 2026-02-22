@@ -23,7 +23,10 @@ export const submitToWaitlist = async (name: string, email: string, phoneNumber:
     } else {
       const text = await response.text();
       console.error("Non-JSON response from server:", text);
-      return { success: false, message: 'Server error: Received non-JSON response. Please try again later.' };
+      return { 
+        success: false, 
+        message: `Server error: Received non-JSON response. Preview: ${text.substring(0, 100)}...` 
+      };
     }
   } catch (error) {
     console.error("Error submitting proposal:", error);
