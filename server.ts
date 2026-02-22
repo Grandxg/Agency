@@ -3,10 +3,11 @@ import { createServer as createViteServer } from "vite";
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
-// Use process.cwd() for reliable path resolution in container
-const ROOT_DIR = process.cwd();
-const DATA_FILE = path.join(ROOT_DIR, 'proposals.json');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DATA_FILE = path.join(__dirname, 'proposals.json');
 
 // Ensure data file exists
 if (!fs.existsSync(DATA_FILE)) {
@@ -24,15 +25,10 @@ async function startServer() {
 
     console.log("Initializing server...");
 
-    // JSON Body Parser with Error Handling
-    app.use(express.json());
-    app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-      if (err instanceof SyntaxError && 'body' in err) {
-        console.error("JSON Parse Error:", err);
-        return res.status(400).json({ success: false, message: "Invalid JSON payload" });
-      }
-      next();
-    });
+    // Middleware
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 
     // Request logging middleware
     app.use((req, res, next) => {
@@ -40,15 +36,16 @@ async function startServer() {
       next();
     });
 
-    // API Routes
-    
+    // API Router
+    const apiRouter = express.Router();
+
     // Health check
-    app.get("/api/health", (req, res) => {
+    apiRouter.get("/health", (req, res) => {
       res.json({ status: "ok", timestamp: new Date().toISOString() });
     });
     
     // Get all proposals (Admin only)
-    app.get("/api/proposals", (req, res) => {
+    apiRouter.get("/proposals", (req, res) => {
       try {
         if (fs.existsSync(DATA_FILE)) {
           const data = fs.readFileSync(DATA_FILE, 'utf8');
@@ -63,7 +60,7 @@ async function startServer() {
     });
 
     // Submit a proposal
-    app.post("/api/proposals", (req, res) => {
+    apiRouter.post("/proposals", (req, res) => {
       console.log("Received proposal submission:", req.body);
       try {
         const { name, email, phoneNumber, message } = req.body;
@@ -106,7 +103,7 @@ async function startServer() {
     });
 
     // Login endpoint
-    app.post("/api/login", (req, res) => {
+    apiRouter.post("/login", (req, res) => {
       const { username, password } = req.body;
       console.log("Login attempt:", { username, password }); 
       if (username === "agency_grothview" && password === "grothview@@5656") {
@@ -115,6 +112,9 @@ async function startServer() {
         res.status(401).json({ success: false, message: "Invalid credentials" });
       }
     });
+
+    // Mount API Router
+    app.use("/api", apiRouter);
 
     // API 404 Handler - Prevent falling through to Vite
     app.use("/api/*", (req, res) => {
@@ -139,7 +139,7 @@ async function startServer() {
       app.use(vite.middlewares);
     } else {
       // Production static file serving (if built)
-      app.use(express.static(path.join(ROOT_DIR, 'dist')));
+      app.use(express.static(path.join(__dirname, 'dist')));
     }
 
     app.listen(PORT, "0.0.0.0", () => {
