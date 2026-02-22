@@ -7,6 +7,7 @@ export const WaitlistForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phoneNumber: '',
     message: '',
   });
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,7 @@ export const WaitlistForm: React.FC = () => {
     setError(null);
 
     // Reusing the API service but passing 0 for age for now as we transition
-    const response = await submitToWaitlist(formData.name, formData.email, formData.message);
+    const response = await submitToWaitlist(formData.name, formData.email, formData.phoneNumber, formData.message);
 
     setLoading(false);
     if (response.success) {
@@ -70,6 +71,16 @@ export const WaitlistForm: React.FC = () => {
           type="email" 
           placeholder="you@company.com" 
           value={formData.email}
+          onChange={handleChange}
+          required
+        />
+
+        <Input 
+          label="PHONE NUMBER" 
+          name="phoneNumber" 
+          type="tel" 
+          placeholder="+1 (555) 000-0000" 
+          value={formData.phoneNumber}
           onChange={handleChange}
           required
         />

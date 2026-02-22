@@ -6,53 +6,21 @@ const DELAY_MS = 1000;
 // LocalStorage key for persistence
 const DB_KEY = 'plusone_waitlist_db';
 
-export const submitToWaitlist = async (name: string, email: string, message: string): Promise<WaitlistResponse> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      try {
-        // Backend Validation Logic Simulation
-        if (!name || name.length < 2) {
-          resolve({ success: false, message: 'Name must be at least 2 characters.' });
-          return;
-        }
-        
-        // Basic email regex for validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email || !emailRegex.test(email)) {
-          resolve({ success: false, message: 'Please enter a valid email address.' });
-          return;
-        }
+export const submitToWaitlist = async (name: string, email: string, phoneNumber: string, message: string): Promise<WaitlistResponse> => {
+  try {
+    const response = await fetch('/api/proposals', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, phoneNumber, message }),
+    });
 
-        if (!message || message.length < 5) {
-          resolve({ success: false, message: 'Message must be at least 5 characters.' });
-          return;
-        }
-
-        // Simulating Database Insert
-        const currentDataRaw = localStorage.getItem(DB_KEY);
-        const currentData: WaitlistEntry[] = currentDataRaw ? JSON.parse(currentDataRaw) : [];
-
-        const newEntry: WaitlistEntry = {
-          id: currentData.length + 1,
-          name,
-          email,
-          message,
-          timestamp: new Date().toISOString(),
-        };
-
-        const updatedData = [...currentData, newEntry];
-        localStorage.setItem(DB_KEY, JSON.stringify(updatedData));
-
-        resolve({
-          success: true,
-          message: 'Welcome to the club!',
-          data: newEntry,
-        });
-      } catch (error) {
-        resolve({ success: false, message: 'Internal server error. Please try again.' });
-      }
-    }, DELAY_MS);
-  });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { success: false, message: 'Internal server error. Please try again.' };
+  }
 };
 
 export const getWaitlistCount = async (): Promise<number> => {
