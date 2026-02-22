@@ -24,6 +24,28 @@ export const WaitlistForm: React.FC = () => {
     setLoading(true);
     setError(null);
 
+    // Client-side validation
+    if (!formData.name || formData.name.length < 2) {
+      setError('Name must be at least 2 characters.');
+      setLoading(false);
+      return;
+    }
+    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setError('Please enter a valid email address.');
+      setLoading(false);
+      return;
+    }
+    if (!formData.phoneNumber || !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(formData.phoneNumber)) {
+      setError('Please enter a valid phone number.');
+      setLoading(false);
+      return;
+    }
+    if (!formData.message || formData.message.length < 5) {
+      setError('Message must be at least 5 characters.');
+      setLoading(false);
+      return;
+    }
+
     // Reusing the API service but passing 0 for age for now as we transition
     const response = await submitToWaitlist(formData.name, formData.email, formData.phoneNumber, formData.message);
 

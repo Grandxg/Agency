@@ -32,14 +32,26 @@ async function startServer() {
 
   // Submit a proposal
   app.post("/api/proposals", (req, res) => {
+    console.log("Received proposal submission:", req.body);
     try {
       const { name, email, phoneNumber, message } = req.body;
       
       if (!name || !email || !phoneNumber || !message) {
+        console.error("Missing fields in proposal:", { name, email, phoneNumber, message });
         return res.status(400).json({ success: false, message: "All fields are required" });
       }
 
-      const currentData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+      let currentData = [];
+      try {
+        if (fs.existsSync(DATA_FILE)) {
+          const fileContent = fs.readFileSync(DATA_FILE, 'utf8');
+          currentData = JSON.parse(fileContent);
+        }
+      } catch (readError) {
+        console.error("Error reading proposals file:", readError);
+        // If file is corrupt, start fresh (or handle differently in prod)
+        currentData = [];
+      }
       
       const newEntry = {
         id: Date.now(),
@@ -53,6 +65,7 @@ async function startServer() {
       currentData.push(newEntry);
       fs.writeFileSync(DATA_FILE, JSON.stringify(currentData, null, 2));
 
+      console.log("Proposal saved successfully:", newEntry.id);
       res.json({ success: true, message: "Proposal submitted successfully", data: newEntry });
     } catch (error) {
       console.error("Error saving proposal:", error);

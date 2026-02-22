@@ -16,10 +16,18 @@ export const submitToWaitlist = async (name: string, email: string, phoneNumber:
       body: JSON.stringify({ name, email, phoneNumber, message }),
     });
 
-    const data = await response.json();
-    return data;
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.indexOf("application/json") !== -1) {
+      const data = await response.json();
+      return data;
+    } else {
+      const text = await response.text();
+      console.error("Non-JSON response from server:", text);
+      return { success: false, message: 'Server error: Received non-JSON response. Please try again later.' };
+    }
   } catch (error) {
-    return { success: false, message: 'Internal server error. Please try again.' };
+    console.error("Error submitting proposal:", error);
+    return { success: false, message: 'Network error or server unreachable. Please check your connection.' };
   }
 };
 
