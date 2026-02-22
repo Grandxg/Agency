@@ -25,11 +25,11 @@ async function startServer() {
 
     console.log("Starting server initialization...");
 
-    // Built-in middleware
+    // Built-in middleware for parsing JSON and URL-encoded data
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    // Request logging
+    // Request logging - Log EVERY request hitting the server
     app.use((req, res, next) => {
       console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
       next();
@@ -112,16 +112,16 @@ async function startServer() {
       }
     });
 
-    // Mount API Router
+    // Mount API Router at /api
     app.use("/api", apiRouter);
 
-    // API 404 Handler
+    // API 404 Handler - Explicitly catch unhandled API routes
     app.use("/api/*", (req, res) => {
       console.log(`404 API Request: ${req.method} ${req.originalUrl}`);
       res.status(404).json({ success: false, message: "API endpoint not found" });
     });
 
-    // Vite middleware
+    // Vite middleware setup
     if (process.env.NODE_ENV !== "production") {
       console.log("Setting up Vite middleware...");
       const vite = await createViteServer({
@@ -130,6 +130,7 @@ async function startServer() {
       });
       app.use(vite.middlewares);
     } else {
+      console.log("Serving static files from dist...");
       app.use(express.static(path.join(ROOT_DIR, 'dist')));
     }
 
@@ -146,7 +147,8 @@ async function startServer() {
     });
   } catch (error) {
     console.error("Failed to start server:", error);
-    // Do not exit, just log. Exiting kills the container.
+    // Keep process alive to see logs
+    setInterval(() => {}, 1000);
   }
 }
 
