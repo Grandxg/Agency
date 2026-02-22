@@ -18,6 +18,12 @@ async function startServer() {
 
   app.use(express.json());
 
+  // Request logging middleware
+  app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next();
+  });
+
   // API Routes
   
   // Get all proposals (Admin only - in real app would need token, here we just trust the UI gate)
@@ -26,6 +32,7 @@ async function startServer() {
       const data = fs.readFileSync(DATA_FILE, 'utf8');
       res.json(JSON.parse(data));
     } catch (error) {
+      console.error("Error reading proposals:", error);
       res.status(500).json({ error: "Failed to read data" });
     }
   });
@@ -81,6 +88,20 @@ async function startServer() {
       res.json({ success: true });
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
+    }
+  });
+
+  // API 404 Handler - Prevent falling through to Vite
+  app.use("/api/*", (req, res) => {
+    console.log(`404 API Request: ${req.method} ${req.originalUrl}`);
+    res.status(404).json({ success: false, message: "API endpoint not found" });
+  });
+
+  // Global Error Handler
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error("Unhandled Express error:", err);
+    if (!res.headersSent) {
+      res.status(500).json({ success: false, message: "Internal server error" });
     }
   });
 
