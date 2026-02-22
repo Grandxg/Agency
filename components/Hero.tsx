@@ -48,7 +48,7 @@ export const Hero: React.FC = () => {
         >
              <path 
                 d="M0,120 C320,0 880,0 1200,120 H0 Z" 
-                className="fill-[#F3E8FF]"
+                className="fill-white"
             ></path>
         </svg>
       </div>

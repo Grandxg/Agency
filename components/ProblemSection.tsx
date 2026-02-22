@@ -125,7 +125,7 @@ export const ProblemSection: React.FC = () => {
         >
              <path 
                 d="M0,120 C320,0 880,0 1200,120 H0 Z" 
-                className="fill-[#F3E8FF]"
+                className="fill-[#FDFBFF]"
             ></path>
         </svg>
       </div>
