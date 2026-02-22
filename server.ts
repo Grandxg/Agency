@@ -63,6 +63,7 @@ async function startServer() {
   // Login endpoint
   app.post("/api/login", (req, res) => {
     const { username, password } = req.body;
+    console.log("Login attempt:", { username, password }); // Debug log
     if (username === "agency_grothview" && password === "grothview@@5656") {
       res.json({ success: true });
     } else {

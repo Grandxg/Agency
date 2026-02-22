@@ -47,15 +47,23 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
-      const data = await res.json();
-
-      if (data.success) {
-        setIsAuthenticated(true);
+      
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        const data = await res.json();
+        if (data.success) {
+          setIsAuthenticated(true);
+        } else {
+          setError(data.message || 'Invalid credentials');
+        }
       } else {
-        setError('Invalid credentials');
+        const text = await res.text();
+        console.error("Non-JSON response:", text);
+        setError('Server error: Received non-JSON response');
       }
     } catch (err) {
-      setError('Login failed');
+      console.error("Login error:", err);
+      setError('Login failed: ' + (err instanceof Error ? err.message : String(err)));
     } finally {
       setLoading(false);
     }
