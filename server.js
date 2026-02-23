@@ -1,8 +1,6 @@
 import express from "express";
-import { createServer as createViteServer } from "vite";
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import cors from 'cors';
 
 // Use process.cwd() for reliable path resolution in container
@@ -32,9 +30,10 @@ process.on('unhandledRejection', (reason, promise) => {
 async function startServer() {
   try {
     const app = express();
-    const PORT = 3000;
+    // Run API server on 3001 to avoid conflict with Vite on 3000
+    const PORT = 3001;
 
-    console.log("Starting server initialization...");
+    console.log("Starting API server initialization...");
 
     // Middleware
     app.use(cors());
@@ -48,7 +47,7 @@ async function startServer() {
       next();
     });
 
-    // API Routes - Defined directly on app to avoid Router issues
+    // API Routes
     
     // Health check
     app.get("/api/health", (req, res) => {
@@ -124,24 +123,11 @@ async function startServer() {
       }
     });
 
-    // API 404 Handler - Explicitly catch unhandled API routes
+    // API 404 Handler
     app.use("/api/*", (req, res) => {
       console.log(`404 API Request: ${req.method} ${req.originalUrl}`);
       res.status(404).json({ success: false, message: "API endpoint not found" });
     });
-
-    // Vite middleware setup
-    if (process.env.NODE_ENV !== "production") {
-      console.log("Setting up Vite middleware...");
-      const vite = await createViteServer({
-        server: { middlewareMode: true },
-        appType: "spa",
-      });
-      app.use(vite.middlewares);
-    } else {
-      console.log("Serving static files from dist...");
-      app.use(express.static(path.join(ROOT_DIR, 'dist')));
-    }
 
     // Global Error Handler
     app.use((err, req, res, next) => {
@@ -152,7 +138,7 @@ async function startServer() {
     });
 
     app.listen(PORT, "0.0.0.0", () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`API Server running on http://localhost:${PORT}`);
     });
   } catch (error) {
     console.error("Failed to start server:", error);
