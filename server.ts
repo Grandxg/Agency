@@ -3,6 +3,7 @@ import { createServer as createViteServer } from "vite";
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
 
 // Use process.cwd() for reliable path resolution in container
 const ROOT_DIR = process.cwd();
@@ -25,7 +26,8 @@ async function startServer() {
 
     console.log("Starting server initialization...");
 
-    // Built-in middleware for parsing JSON and URL-encoded data
+    // Middleware
+    app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
@@ -35,16 +37,15 @@ async function startServer() {
       next();
     });
 
-    // API Router
-    const apiRouter = express.Router();
-
+    // API Routes - Defined directly on app to avoid Router issues
+    
     // Health check
-    apiRouter.get("/health", (req, res) => {
+    app.get("/api/health", (req, res) => {
       res.json({ status: "ok", timestamp: new Date().toISOString() });
     });
     
     // Get all proposals
-    apiRouter.get("/proposals", (req, res) => {
+    app.get("/api/proposals", (req, res) => {
       try {
         if (fs.existsSync(DATA_FILE)) {
           const data = fs.readFileSync(DATA_FILE, 'utf8');
@@ -59,7 +60,7 @@ async function startServer() {
     });
 
     // Submit a proposal
-    apiRouter.post("/proposals", (req, res) => {
+    app.post("/api/proposals", (req, res) => {
       console.log("Received proposal submission:", req.body);
       try {
         const { name, email, phoneNumber, message } = req.body;
@@ -102,7 +103,7 @@ async function startServer() {
     });
 
     // Login endpoint
-    apiRouter.post("/login", (req, res) => {
+    app.post("/api/login", (req, res) => {
       const { username, password } = req.body;
       console.log("Login attempt:", { username, password }); 
       if (username === "agency_grothview" && password === "grothview@@5656") {
@@ -111,9 +112,6 @@ async function startServer() {
         res.status(401).json({ success: false, message: "Invalid credentials" });
       }
     });
-
-    // Mount API Router at /api
-    app.use("/api", apiRouter);
 
     // API 404 Handler - Explicitly catch unhandled API routes
     app.use("/api/*", (req, res) => {
@@ -148,7 +146,9 @@ async function startServer() {
   } catch (error) {
     console.error("Failed to start server:", error);
     // Keep process alive to see logs
-    setInterval(() => {}, 1000);
+    setInterval(() => {
+      console.log("Server process alive (failed start state)");
+    }, 60000);
   }
 }
 
