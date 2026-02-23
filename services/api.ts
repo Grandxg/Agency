@@ -22,10 +22,10 @@ export const submitToWaitlist = async (name: string, email: string, phoneNumber:
       return data;
     } else {
       const text = await response.text();
-      console.error("Non-JSON response from server:", text);
+      console.error(`Non-JSON response (${response.status}) from server:`, text);
       return { 
         success: false, 
-        message: `Server error: Received non-JSON response. Preview: ${text.substring(0, 100)}...` 
+        message: `Server error (${response.status}): Received non-JSON response. Preview: ${text.substring(0, 100)}...` 
       };
     }
   } catch (error) {

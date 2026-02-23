@@ -7,7 +7,8 @@ import cors from 'cors';
 
 // Use process.cwd() for reliable path resolution in container
 const ROOT_DIR = process.cwd();
-const DATA_FILE = path.join(ROOT_DIR, 'proposals.json');
+// Use /tmp for writable storage in container environments
+const DATA_FILE = '/tmp/proposals.json';
 
 // Ensure data file exists (non-blocking, safe)
 try {
@@ -19,6 +20,15 @@ try {
   console.error("Failed to check/create proposals.json:", err);
 }
 
+// Prevent crash on uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('UNHANDLED REJECTION:', reason);
+});
+
 async function startServer() {
   try {
     const app = express();
@@ -28,7 +38,8 @@ async function startServer() {
 
     // Middleware
     app.use(cors());
-    app.use(express.json());
+    app.options('*', cors()); // Enable pre-flight for all routes
+    app.use(express.json({ limit: '10mb' })); // Increase limit
     app.use(express.urlencoded({ extended: true }));
 
     // Request logging - Log EVERY request hitting the server
@@ -133,7 +144,7 @@ async function startServer() {
     }
 
     // Global Error Handler
-    app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    app.use((err, req, res, next) => {
       console.error("Unhandled Express error:", err);
       if (!res.headersSent) {
         res.status(500).json({ success: false, message: "Internal server error" });
@@ -151,10 +162,5 @@ async function startServer() {
     }, 60000);
   }
 }
-
-// Handle unhandled rejections to prevent crash
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-});
 
 startServer();
