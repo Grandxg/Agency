@@ -66,8 +66,17 @@ export const WaitlistForm: React.FC = () => {
         });
       } else {
         const data = await response.json();
+        console.error("Formspree Error:", data);
         if (data.errors && Array.isArray(data.errors)) {
-          setError(data.errors.map((err: any) => err.message).join(", "));
+          // Formspree returns errors like [{ field: "email", message: "is missing" }]
+          // We want to show a friendly message
+          const messages = data.errors.map((err: any) => {
+            if (err.field) return `${err.field} ${err.message}`;
+            return err.message;
+          });
+          setError(messages.join(", "));
+        } else if (data.error) {
+           setError(data.error);
         } else {
           setError("Oops! There was a problem submitting your form");
         }

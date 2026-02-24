@@ -29,8 +29,7 @@ export const Footer: React.FC = () => {
         {/* Brand Column */}
         <div className="lg:w-1/3">
            <div className="flex flex-col leading-none mb-8 select-none">
-            <span className="font-display font-black text-6xl tracking-tighter text-white">GROTH</span>
-            <span className="font-display font-black text-6xl tracking-tighter text-white -mt-3">VIEW</span>
+            <img src="/footer-logo.svg" alt="GrothView" className="h-24 w-auto object-contain mb-4" />
           </div>
           <p className="text-white/80 font-body text-base leading-relaxed max-w-sm mb-8">
             Your partner for Organic Marketing, PR, Video Editing, and High-Performance Web & App Development.

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 150" fill="none">
+  <!-- Icon Group -->
+  <g transform="translate(10, 20) scale(0.22)">
+     <!-- Purple G Background -->
+    <path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208c114.9 0 208-93.1 208-208S370.9 48 256 48zm0 368c-88.4 0-160-71.6-160-160S167.6 96 256 96c38.7 0 74.3 13.8 101.8 36.9l-35.4 35.4c-17.6-14.2-40.1-22.8-66.4-22.8-57.4 0-104 46.6-104 104s46.6 104 104 104c49.6 0 91.1-34.9 101.3-81.1H256v-50.7h156.4c1.6 8.2 2.4 16.8 2.4 25.8 0 91.5-74.5 165.9-158.8 165.9z" fill="#4C1D95"/>
+    <!-- Green Arrow Overlay -->
+    <path d="M150 350 C 200 350, 250 300, 320 200 L 280 200 L 360 120 L 360 200 L 340 200 C 280 300, 200 380, 150 380 Z" fill="#22C55E" stroke="white" stroke-width="10"/>
+  </g>
+
+  <!-- Text -->
+  <text x="140" y="95" font-family="Arial, sans-serif" font-weight="bold" font-size="80" fill="#4C1D95">Growth</text>
+  <text x="415" y="95" font-family="Arial, sans-serif" font-weight="bold" font-size="80" fill="#A78BFA">View</text>
+  
+  <!-- Slogan -->
+  <line x1="140" y1="125" x2="170" y2="125" stroke="#A78BFA" stroke-width="3" />
+  <text x="180" y="130" font-family="Arial, sans-serif" font-size="22" fill="#FFFFFF">Your Vision. Your Growth.</text>
+  <line x1="450" y1="125" x2="480" y2="125" stroke="#A78BFA" stroke-width="3" />
+</svg>
