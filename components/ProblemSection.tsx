@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ChevronLeft, MoreVertical } from 'lucide-react';
-import { AdminPanel } from './AdminPanel';
 
 const ChatBubble = ({ text, isUser, delay, inView }: { text: string; isUser: boolean; delay: number; inView: boolean }) => {
   return (
@@ -30,11 +29,9 @@ export const ProblemSection: React.FC = () => {
     triggerOnce: true,
     threshold: 0.3,
   });
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
 
   return (
     <section className="pt-24 pb-48 px-4 bg-white relative overflow-hidden">
-      <AdminPanel isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
       
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 relative z-10">
         

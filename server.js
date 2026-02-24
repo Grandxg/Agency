@@ -52,69 +52,6 @@ async function startServer() {
       res.json({ status: "ok", timestamp: new Date().toISOString() });
     });
     
-    app.get("/api/proposals", (req, res) => {
-      try {
-        if (fs.existsSync(DATA_FILE)) {
-          const data = fs.readFileSync(DATA_FILE, 'utf8');
-          res.json(JSON.parse(data));
-        } else {
-          res.json([]);
-        }
-      } catch (error) {
-        console.error("Error reading proposals:", error);
-        res.status(500).json({ error: "Failed to read data" });
-      }
-    });
-
-    app.post("/api/proposals", (req, res) => {
-      console.log("Received proposal submission:", req.body);
-      try {
-        const { name, email, phoneNumber, message } = req.body;
-        
-        if (!name || !email || !phoneNumber || !message) {
-          return res.status(400).json({ success: false, message: "All fields are required" });
-        }
-
-        let currentData = [];
-        try {
-          if (fs.existsSync(DATA_FILE)) {
-            const fileContent = fs.readFileSync(DATA_FILE, 'utf8');
-            currentData = JSON.parse(fileContent);
-            if (!Array.isArray(currentData)) currentData = [];
-          }
-        } catch (readError) {
-          currentData = [];
-        }
-        
-        const newEntry = {
-          id: Date.now(),
-          name,
-          email,
-          phoneNumber,
-          message,
-          timestamp: new Date().toISOString(),
-        };
-
-        currentData.push(newEntry);
-        fs.writeFileSync(DATA_FILE, JSON.stringify(currentData, null, 2));
-
-        console.log("Proposal saved:", newEntry.id);
-        res.json({ success: true, message: "Proposal submitted successfully", data: newEntry });
-      } catch (error) {
-        console.error("Error saving proposal:", error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-      }
-    });
-
-    app.post("/api/login", (req, res) => {
-      const { username, password } = req.body;
-      if (username === "agency_grothview" && password === "grothview@@5656") {
-        res.json({ success: true });
-      } else {
-        res.status(401).json({ success: false, message: "Invalid credentials" });
-      }
-    });
-
     // Vite middleware setup
     if (process.env.NODE_ENV !== "production") {
       console.log("Setting up Vite middleware...");
