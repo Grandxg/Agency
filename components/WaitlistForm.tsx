@@ -35,11 +35,12 @@ export const WaitlistForm: React.FC = () => {
       setLoading(false);
       return;
     }
-    if (!formData.phoneNumber || !/^[+]?[\d\s\-().]{7,}$/.test(formData.phoneNumber) || formData.phoneNumber.replace(/\D/g, '').length < 7) {
-      setError('Please enter a valid phone number with country code (e.g., +1 555-0123).');
-      setLoading(false);
-      return;
-    }
+    // Relaxed phone validation - just check if it exists and has some length
+    // if (!formData.phoneNumber || formData.phoneNumber.length < 5) {
+    //   setError('Please enter a valid phone number.');
+    //   setLoading(false);
+    //   return;
+    // }
     if (!formData.message || formData.message.length < 5) {
       setError('Message must be at least 5 characters.');
       setLoading(false);
@@ -47,9 +48,33 @@ export const WaitlistForm: React.FC = () => {
     }
 
     try {
+      // Map data to match potential backend field requirements
+      // The error "Contact no (Add country code first) is missing" suggests strict naming and formatting
+      
+      let formattedPhone = formData.phoneNumber;
+      
+      // If phone is provided but doesn't start with +, assume it needs a country code.
+      // We'll prepend +91 as a default if it looks like a 10-digit number, or just ensure it starts with +
+      if (formattedPhone && !formattedPhone.startsWith('+')) {
+         formattedPhone = `+91 ${formattedPhone}`; 
+      }
+
+      const submissionData: any = {
+        Name: formData.name,
+        Email: formData.email,
+        "Contact no": formattedPhone || "Not provided", // Changed to lowercase 'n' to match error exactly
+        Message: formData.message,
+        _subject: "New Submission from GrothView"
+      };
+      
+      // Ensure we always send the field if the backend requires it
+      if (!formattedPhone) {
+          submissionData["Contact no"] = "Not provided";
+      }
+
       const response = await fetch("https://formspree.io/f/mdalynyg", {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionData),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -129,13 +154,12 @@ export const WaitlistForm: React.FC = () => {
         />
 
         <Input 
-          label="PHONE NUMBER" 
+          label="PHONE NUMBER (OPTIONAL)" 
           name="phoneNumber" 
           type="tel" 
-          placeholder="+1 (555) 000-0000" 
+          placeholder="(555) 000-0000" 
           value={formData.phoneNumber}
           onChange={handleChange}
-          required
         />
 
         <Input 
