@@ -46,14 +46,36 @@ export const WaitlistForm: React.FC = () => {
       return;
     }
 
-    // Reusing the API service but passing 0 for age for now as we transition
-    const response = await submitToWaitlist(formData.name, formData.email, formData.phoneNumber, formData.message);
+    try {
+      const response = await fetch("https://formspree.io/f/mdalynyg", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
 
-    setLoading(false);
-    if (response.success) {
-      setSuccess(true);
-    } else {
-      setError(response.message);
+      if (response.ok) {
+        setSuccess(true);
+        setFormData({
+          name: '',
+          email: '',
+          phoneNumber: '',
+          message: '',
+        });
+      } else {
+        const data = await response.json();
+        if (data.errors && Array.isArray(data.errors)) {
+          setError(data.errors.map((err: any) => err.message).join(", "));
+        } else {
+          setError("Oops! There was a problem submitting your form");
+        }
+      }
+    } catch (error) {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
