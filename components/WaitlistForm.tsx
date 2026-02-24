@@ -48,65 +48,34 @@ export const WaitlistForm: React.FC = () => {
     }
 
     try {
-      // Map data to match potential backend field requirements
-      // The error "Contact no (Add country code first) is missing" suggests strict naming and formatting
+      // Google Form Submission URL
+      const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdgSl-0l7aq-cTAA4n4P-0nN6RcJ7bKF0Fm9jVWhSIARcZgig/formResponse";
       
-      let formattedPhone = formData.phoneNumber;
-      
-      // If phone is provided but doesn't start with +, assume it needs a country code.
-      // We'll prepend +91 as a default if it looks like a 10-digit number, or just ensure it starts with +
-      if (formattedPhone && !formattedPhone.startsWith('+')) {
-         formattedPhone = `+91 ${formattedPhone}`; 
-      }
+      // Create FormData object
+      const formBody = new FormData();
+      formBody.append("entry.1194643129", formData.name);
+      formBody.append("entry.100275060", formData.email);
+      formBody.append("entry.2004854218", formData.phoneNumber || "");
+      formBody.append("entry.1073026971", formData.message);
 
-      const submissionData: any = {
-        Name: formData.name,
-        Email: formData.email,
-        "Contact no": formattedPhone || "Not provided", // Changed to lowercase 'n' to match error exactly
-        Message: formData.message,
-        _subject: "New Submission from GrothView"
-      };
-      
-      // Ensure we always send the field if the backend requires it
-      if (!formattedPhone) {
-          submissionData["Contact no"] = "Not provided";
-      }
-
-      const response = await fetch("https://formspree.io/f/mdalynyg", {
+      // Submit using fetch with no-cors mode
+      await fetch(GOOGLE_FORM_URL, {
         method: "POST",
-        body: JSON.stringify(submissionData),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
+        body: formBody,
+        mode: "no-cors", // Required for Google Forms
       });
 
-      if (response.ok) {
-        setSuccess(true);
-        setFormData({
-          name: '',
-          email: '',
-          phoneNumber: '',
-          message: '',
-        });
-      } else {
-        const data = await response.json();
-        console.error("Formspree Error:", data);
-        if (data.errors && Array.isArray(data.errors)) {
-          // Formspree returns errors like [{ field: "email", message: "is missing" }]
-          // We want to show a friendly message
-          const messages = data.errors.map((err: any) => {
-            if (err.field) return `${err.field} ${err.message}`;
-            return err.message;
-          });
-          setError(messages.join(", "));
-        } else if (data.error) {
-           setError(data.error);
-        } else {
-          setError("Oops! There was a problem submitting your form");
-        }
-      }
+      // Since no-cors returns an opaque response, we assume success if no network error occurs
+      setSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        phoneNumber: '',
+        message: '',
+      });
+
     } catch (error) {
+      console.error("Submission Error:", error);
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);
