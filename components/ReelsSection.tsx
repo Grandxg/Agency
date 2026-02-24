@@ -4,7 +4,7 @@ import { YouTubeCard } from './YouTubeCard';
 
 export const ReelsSection: React.FC = () => {
   return (
-    <section className="py-24 px-4 bg-[#FDFBFF] relative border-t-2 border-black/5">
+    <section id="reels-section" className="py-24 px-4 bg-[#FDFBFF] relative border-t-2 border-black/5">
       <div className="max-w-7xl mx-auto">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 relative z-10">

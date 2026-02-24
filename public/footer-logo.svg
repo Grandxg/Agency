@@ -8,8 +8,8 @@
   </g>
 
   <!-- Text -->
-  <text x="140" y="95" font-family="Arial, sans-serif" font-weight="bold" font-size="80" fill="#4C1D95">Growth</text>
-  <text x="415" y="95" font-family="Arial, sans-serif" font-weight="bold" font-size="80" fill="#A78BFA">View</text>
+  <text x="140" y="95" font-family="Arial, sans-serif" font-weight="bold" font-size="80" fill="#4C1D95">Groth</text>
+  <text x="365" y="95" font-family="Arial, sans-serif" font-weight="bold" font-size="80" fill="#A78BFA">View</text>
   
   <!-- Slogan -->
   <line x1="140" y1="125" x2="170" y2="125" stroke="#A78BFA" stroke-width="3" />
