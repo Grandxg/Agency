@@ -35,8 +35,8 @@ export const WaitlistForm: React.FC = () => {
       setLoading(false);
       return;
     }
-    if (!formData.phoneNumber || !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(formData.phoneNumber)) {
-      setError('Please enter a valid phone number.');
+    if (!formData.phoneNumber || !/^[+]?[\d\s\-().]{7,}$/.test(formData.phoneNumber) || formData.phoneNumber.replace(/\D/g, '').length < 7) {
+      setError('Please enter a valid phone number with country code (e.g., +1 555-0123).');
       setLoading(false);
       return;
     }
