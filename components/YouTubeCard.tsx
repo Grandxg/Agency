@@ -20,13 +20,51 @@ export const YouTubeCard = ({
   // Extract the video ID from the URL
   const match = url.match(/\/shorts\/([a-zA-Z0-9_-]+)/);
   const videoId = match ? match[1] : '';
-  // YouTube embed URL for Shorts style
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${videoId}&rel=0&showinfo=0&modestbranding=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`;
+  // YouTube embed URL for Shorts style with enablejsapi=1
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${videoId}&rel=0&showinfo=0&modestbranding=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`;
   // Use provided thumbnail or fallback to YouTube maxresdefault
   const thumbnailUrl = thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!isLoaded) return;
+
+    // 1. Pause when out of view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          iframeRef.current?.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
+      },
+      { threshold: 0.1 } // Trigger when less than 10% is visible
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // 2. Pause when clicking any button or link
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Check if the click target is a button or link (or inside one)
+      if (target.closest('button') || target.closest('a')) {
+        iframeRef.current?.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      }
+    };
+
+    window.addEventListener('click', handleGlobalClick);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('click', handleGlobalClick);
+    };
+  }, [isLoaded]);
+
   return (
     <div 
+      ref={containerRef}
       className="group relative h-[750px] w-full rounded-3xl overflow-hidden border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col"
     >
       {/* Iframe/Poster Container */}
@@ -66,6 +104,7 @@ export const YouTubeCard = ({
         ) : (
           <>
             <iframe 
+              ref={iframeRef}
               src={embedUrl}
               className="w-full h-full absolute inset-0 object-cover"
               frameBorder="0"

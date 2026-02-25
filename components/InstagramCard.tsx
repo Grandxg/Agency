@@ -24,8 +24,44 @@ export const InstagramCard = ({
   // Use provided thumbnail or fallback to Instagram media URL
   const thumbnailUrl = thumbnail || `https://www.instagram.com/p/${reelId}/media/?size=l`;
 
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!isLoaded) return;
+
+    // 1. Reset (Pause) when out of view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          setIsLoaded(false); // Unmount iframe to stop playback
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // 2. Reset (Pause) when clicking any button or link
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('button') || target.closest('a')) {
+        setIsLoaded(false);
+      }
+    };
+
+    window.addEventListener('click', handleGlobalClick);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('click', handleGlobalClick);
+    };
+  }, [isLoaded]);
+
   return (
     <div 
+      ref={containerRef}
       className="group relative h-[750px] w-full rounded-3xl overflow-hidden border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col"
     >
       {/* Iframe/Poster Container */}
