@@ -65,42 +65,36 @@ export const ReelsSection: React.FC = () => {
                 <YouTubeCard 
                     title="Viral Short 1"
                     url="https://www.youtube.com/shorts/ifR5xU33QvE"
-                    growth="+620%"
                 />
 
                 {/* YouTube Short 2 */}
                 <YouTubeCard 
                     title="Viral Short 2"
                     url="https://www.youtube.com/shorts/r0APzj_ZChw"
-                    growth="+410%"
                 />
 
                  {/* YouTube Short 3 */}
                  <YouTubeCard 
                     title="Viral Short 3"
                     url="https://www.youtube.com/shorts/D2izfV2zayk"
-                    growth="+350%"
                 />
 
                 {/* Instagram Reel 1 */}
                 <InstagramCard 
                     title="Viral Reel 1"
                     url="https://www.instagram.com/reel/DRMq8XDDNSh/?igsh=YTl6dGFmMWptcTVk"
-                    growth="+580%"
                 />
 
                 {/* Instagram Reel 2 */}
                 <InstagramCard 
                     title="Viral Reel 2"
                     url="https://www.instagram.com/reel/DSfKce2ktBj/?igsh=bHYwNXc2aHpkZWlm"
-                    growth="+250%"
                 />
 
                 {/* Previous Reel 1 */}
                 <InstagramCard 
                     title="Manipulation Dark Reel 1"
                     url="https://www.instagram.com/manipulation_dark/reel/DN360KNk713/?hl=en"
-                    growth="+124%"
                 />
 
             </div>

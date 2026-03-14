@@ -3,11 +3,9 @@ import React from 'react';
 export const InstagramCard = ({ 
   url, 
   title,
-  growth,
 }: { 
   url: string; 
   title: string;
-  growth: string;
 }) => {
   // Extract the reel ID from the URL
   const match = url.match(/\/(?:reel|p)\/([a-zA-Z0-9_-]+)/);
@@ -71,16 +69,6 @@ export const InstagramCard = ({
         {/* Overlays to block redirects but allow center play click if needed */}
         <div className="absolute top-0 left-0 w-full h-24 z-20 bg-transparent pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-32 z-20 bg-transparent pointer-events-none" />
-      </div>
-
-      {/* Stats Footer */}
-      <div className="h-20 bg-white border-t-[3px] border-black flex items-center justify-center px-6 relative z-20 shrink-0">
-        <div className="flex flex-col items-center">
-             <div className="flex items-center gap-1.5 text-green-600 bg-green-100 px-3 py-1.5 rounded-lg border border-green-200 mb-1">
-                <span className="font-bold text-sm font-mono">{growth}</span>
-            </div>
-            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Engagement Growth</span>
-        </div>
       </div>
     </div>
   );
