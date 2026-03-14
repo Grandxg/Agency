@@ -39,7 +39,7 @@ export const ReelsSection: React.FC = () => {
             {/* Left Navigation Arrow */}
             <button 
               onClick={scrollLeft}
-              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-50 bg-white border-[3px] border-black rounded-full p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-[calc(50%+4px)] hover:shadow-[0_0_20px_rgba(168,85,247,0.8),_4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_30px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:-translate-y-1/2 active:translate-x-1 focus:outline-none focus:shadow-[0_0_30px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)] focus:border-[#9333ea]"
+              className="flex absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-50 bg-white border-[3px] border-black rounded-full p-2 md:p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-[calc(50%+4px)] hover:shadow-[0_0_20px_rgba(168,85,247,0.8),_4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_30px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:-translate-y-1/2 active:translate-x-1 focus:outline-none focus:shadow-[0_0_30px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)] focus:border-[#9333ea]"
               aria-label="Scroll left"
             >
               <ChevronLeft size={32} className="text-black" />
@@ -48,7 +48,7 @@ export const ReelsSection: React.FC = () => {
             {/* Right Navigation Arrow */}
             <button 
               onClick={scrollRight}
-              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-50 bg-white border-[3px] border-black rounded-full p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-[calc(50%+4px)] hover:shadow-[0_0_20px_rgba(168,85,247,0.8),_4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_30px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:-translate-y-1/2 active:-translate-x-1 focus:outline-none focus:shadow-[0_0_30px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)] focus:border-[#9333ea]"
+              className="flex absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-50 bg-white border-[3px] border-black rounded-full p-2 md:p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-[calc(50%+4px)] hover:shadow-[0_0_20px_rgba(168,85,247,0.8),_4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_30px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:-translate-y-1/2 active:-translate-x-1 focus:outline-none focus:shadow-[0_0_30px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)] focus:border-[#9333ea]"
               aria-label="Scroll right"
             >
               <ChevronRight size={32} className="text-black" />
@@ -106,23 +106,7 @@ export const ReelsSection: React.FC = () => {
             </div>
         </div>
         
-        {/* Mobile Navigation Arrows (Visible only on small screens) */}
-        <div className="flex md:hidden items-center justify-center gap-6 mt-4 mb-8">
-            <button 
-              onClick={scrollLeft}
-              className="bg-white border-[3px] border-black rounded-full p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_20px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 focus:outline-none focus:shadow-[0_0_20px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)]"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft size={28} className="text-black" />
-            </button>
-            <button 
-              onClick={scrollRight}
-              className="bg-white border-[3px] border-black rounded-full p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_20px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:-translate-x-1 focus:outline-none focus:shadow-[0_0_20px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)]"
-              aria-label="Scroll right"
-            >
-              <ChevronRight size={28} className="text-black" />
-            </button>
-        </div>
+
         
         <div className="mt-4 text-center">
             <a href="#contact-form" className="font-display font-bold text-sm border-b-2 border-black hover:text-[#9333ea] hover:border-[#9333ea] transition-colors pb-0.5">
