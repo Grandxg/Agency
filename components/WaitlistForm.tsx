@@ -153,7 +153,7 @@ export const WaitlistForm: React.FC = () => {
             fullWidth 
             disabled={loading} 
             size="lg"
-            className="rounded-2xl bg-[#E9D5FF] hover:bg-[#D8B4FE]"
+            className="rounded-2xl bg-[#E9D5FF] hover:bg-[#D8B4FE] hover:shadow-[0_0_20px_rgba(216,180,254,0.6),_5px_5px_0px_0px_rgba(0,0,0,1)]"
         >
             {loading ? 'Sending...' : 'Send Message'}
         </Button>

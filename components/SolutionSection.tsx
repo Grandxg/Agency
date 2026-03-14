@@ -37,9 +37,15 @@ export const SolutionSection: React.FC = () => {
             viewBox="0 0 1200 120" 
             preserveAspectRatio="none"
         >
+            <defs>
+                <linearGradient id="footerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#4C1D95" />
+                    <stop offset="100%" stopColor="#2E0249" />
+                </linearGradient>
+            </defs>
              <path 
                 d="M0,120 C320,0 880,0 1200,120 H0 Z" 
-                className="fill-[#2E0249]"
+                fill="url(#footerGradient)"
             ></path>
         </svg>
       </div>

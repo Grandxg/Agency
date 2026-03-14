@@ -19,7 +19,7 @@ const FooterLink = ({ text }: { text: string }) => (
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#2E0249] text-white pt-24 pb-12 px-4 relative z-10 overflow-hidden">
+    <footer className="bg-gradient-to-b from-[#2E0249] to-[#11001C] text-white pt-24 pb-12 px-4 relative z-10 overflow-hidden">
       {/* Decorative Circles */}
       <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#4C1D95] rounded-full opacity-30 blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-[#8B5CF6] rounded-full opacity-20 blur-3xl pointer-events-none"></div>
@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
           <p className="text-white/80 font-body text-base leading-relaxed max-w-sm mb-8">
             Your partner for Organic Marketing, PR, Video Editing, and High-Performance Web & App Development.
           </p>
-          <div className="inline-block bg-[#FDE047] text-black font-bold font-display px-4 py-1 rounded-full text-xs uppercase tracking-widest border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+          <div className="inline-block bg-[#FDE047] text-black font-bold font-display px-4 py-1 rounded-full text-xs uppercase tracking-widest border border-black shadow-[0_0_10px_rgba(253,224,71,0.5),_3px_3px_0px_0px_rgba(0,0,0,1)]">
             Open for Business
           </div>
         </div>

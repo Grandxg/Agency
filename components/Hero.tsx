@@ -23,15 +23,15 @@ export const Hero: React.FC = () => {
 
         <div className="relative bg-white/80 backdrop-blur-sm px-8 py-6 rounded-3xl border-2 border-black/5 shadow-sm mb-12 max-w-2xl">
           <p className="text-xl md:text-2xl font-body text-gray-800 font-medium leading-relaxed">
-            From <span className="text-[#9333ea] font-bold">PR & Video Editing</span> to <br className="hidden md:block" />
-            <span className="text-[#9333ea] font-bold">Websites & CRMs</span>. We build, we market, we scale.
+            From <span className="text-[#9333ea] font-bold drop-shadow-[0_0_8px_rgba(147,51,234,0.3)]">PR & Video Editing</span> to <br className="hidden md:block" />
+            <span className="text-[#9333ea] font-bold drop-shadow-[0_0_8px_rgba(147,51,234,0.3)]">Websites & CRMs</span>. We build, we market, we scale.
           </p>
         </div>
 
         <Button 
           size="lg" 
           onClick={scrollToContact} 
-          className="px-12 py-6 text-2xl rounded-full bg-[#D8B4FE] border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 transition-all"
+          className="px-12 py-6 text-2xl rounded-full bg-[#D8B4FE] border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0_0_25px_rgba(216,180,254,0.6),_8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 transition-all"
         >
           Scale Your Business
         </Button>

@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Action Button */}
-          <Button size="md" onClick={() => scrollToSection('contact-form')} className="whitespace-nowrap bg-[#D8B4FE] hover:bg-[#cba0f9] text-base py-2.5 px-6">
+          <Button size="md" onClick={() => scrollToSection('contact-form')} className="whitespace-nowrap bg-[#D8B4FE] hover:bg-[#cba0f9] text-base py-2.5 px-6 hover:shadow-[0_0_15px_rgba(216,180,254,0.6),_4px_4px_0px_0px_rgba(0,0,0,1)]">
             Get a Proposal
           </Button>
 

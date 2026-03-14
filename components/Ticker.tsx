@@ -7,7 +7,7 @@ export const Ticker: React.FC = () => {
       {/* Blinking Green Dot */}
       <div className="relative flex h-3 w-3">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-3 w-3 bg-[#22c55e] border border-black/10"></span>
+        <span className="relative inline-flex rounded-full h-3 w-3 bg-[#22c55e] border border-black/10 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span>
       </div>
 
       <span className="font-display font-bold text-sm tracking-widest uppercase text-black">WAITLIST STATUS</span>

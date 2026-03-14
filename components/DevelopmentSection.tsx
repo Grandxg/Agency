@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUpRight, Code, Database } from 'lucide-react';
 
 const ProjectCard = ({ title, description, url, image, tags }: { title: string, description: string, url: string, image: string, tags: string[] }) => (
-  <a href={url} target="_blank" rel="noopener noreferrer" className="group relative block bg-white rounded-3xl border-2 border-black overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-4px] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
+  <a href={url} target="_blank" rel="noopener noreferrer" className="group relative block bg-white rounded-3xl border-2 border-black overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-4px] hover:shadow-[0_0_20px_rgba(168,85,247,0.3),_12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
     <div className="aspect-video w-full overflow-hidden border-b-2 border-black relative">
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10"></div>
       <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />

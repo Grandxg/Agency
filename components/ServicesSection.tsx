@@ -7,7 +7,7 @@ const ServiceCard = ({ icon: Icon, title, description, color }: { icon: any, tit
   };
 
   return (
-    <div className="group relative bg-white border-2 border-black rounded-2xl p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between">
+    <div className="group relative bg-white border-2 border-black rounded-2xl p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0_0_20px_rgba(168,85,247,0.3),_12px_12px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between">
       
       {/* Background Accent */}
       <div className={`absolute top-0 right-0 w-32 h-32 bg-${color}-100 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110`}></div>
