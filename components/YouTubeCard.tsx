@@ -17,34 +17,26 @@ export const YouTubeCard = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    let hasBeenVisible = false;
     // 1. Pause when out of view
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) {
+        if (entry.intersectionRatio >= 0.5) {
+          hasBeenVisible = true;
+        } else if (hasBeenVisible && entry.intersectionRatio < 0.5) {
           iframeRef.current?.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          hasBeenVisible = false;
         }
       },
-      { threshold: 0.1 } // Trigger when less than 10% is visible
+      { threshold: [0.5] } // Trigger when crossing 50% visibility
     );
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
 
-    // 2. Pause when clicking any button or link
-    const handleGlobalClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      // Check if the click target is a button or link (or inside one)
-      if (target.closest('button') || target.closest('a')) {
-        iframeRef.current?.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-      }
-    };
-
-    window.addEventListener('click', handleGlobalClick);
-
     return () => {
       observer.disconnect();
-      window.removeEventListener('click', handleGlobalClick);
     };
   }, []);
 
