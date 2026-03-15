@@ -19,8 +19,12 @@ export const ReelsSection: React.FC = () => {
   };
 
   return (
-    <section id="reels-section" className="py-24 px-4 bg-[#F3E8FF] relative border-t-[3px] border-black overflow-hidden">
-      <div className="max-w-[1400px] mx-auto relative">
+    <section 
+      id="reels-section" 
+      className="pt-32 pb-32 md:pb-48 px-4 bg-[#F3E8FF] relative overflow-hidden z-20 mt-[-60px] md:mt-[-120px]"
+      style={{ borderTopLeftRadius: '50% 60px', borderTopRightRadius: '50% 60px' }}
+    >
+      <div className="max-w-[1400px] mx-auto relative z-10">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 relative z-10 px-4 md:px-12">
             <div>

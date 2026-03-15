@@ -19,7 +19,10 @@ const FooterLink = ({ text }: { text: string }) => (
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-b from-[#2E0249] to-[#11001C] text-white pt-24 pb-12 px-4 relative z-10 overflow-hidden">
+    <footer 
+      className="bg-gradient-to-b from-[#2E0249] to-[#11001C] text-white pt-32 pb-12 px-4 relative z-20 overflow-hidden mt-[-60px] md:mt-[-120px]"
+      style={{ borderTopLeftRadius: '50% 60px', borderTopRightRadius: '50% 60px' }}
+    >
       {/* Decorative Circles */}
       <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#4C1D95] rounded-full opacity-30 blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-[#8B5CF6] rounded-full opacity-20 blur-3xl pointer-events-none"></div>

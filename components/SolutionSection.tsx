@@ -3,8 +3,11 @@ import { WaitlistForm } from './WaitlistForm';
 
 export const SolutionSection: React.FC = () => {
   return (
-    <section id="contact-form" className="relative pt-24 pb-48 px-4 overflow-hidden bg-gradient-to-b from-[#F3E8FF] to-[#E9D5FF]">
-      
+    <section 
+      id="contact-form" 
+      className="relative pt-32 pb-32 md:pb-48 px-4 overflow-hidden bg-gradient-to-b from-[#F3E8FF] to-[#E9D5FF] z-20 mt-[-60px] md:mt-[-120px]"
+      style={{ borderTopLeftRadius: '50% 60px', borderTopRightRadius: '50% 60px' }}
+    >
       <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-12 text-center mb-12">
         
         <div>
@@ -26,28 +29,6 @@ export const SolutionSection: React.FC = () => {
             </p>
             <WaitlistForm />
         </div>
-      </div>
-
-      {/* Unique Smooth Curve Divider (Opposite: Hill rising up) */}
-      <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
-        <svg 
-            className="relative block w-[calc(100%+1.3px)] h-[100px] md:h-[180px]" 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none"
-        >
-            <defs>
-                <linearGradient id="footerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#4C1D95" />
-                    <stop offset="100%" stopColor="#2E0249" />
-                </linearGradient>
-            </defs>
-             <path 
-                d="M0,120 C320,0 880,0 1200,120 H0 Z" 
-                fill="url(#footerGradient)"
-            ></path>
-        </svg>
       </div>
     </section>
   );

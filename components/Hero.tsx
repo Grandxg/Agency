@@ -36,22 +36,6 @@ export const Hero: React.FC = () => {
           Scale Your Business
         </Button>
       </div>
-
-      {/* Unique Smooth Curve Divider (Matches ProofSection Background Color #F3E8FF) */}
-      <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
-        <svg 
-            className="relative block w-[calc(100%+1.3px)] h-[100px] md:h-[180px]" 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none"
-        >
-             <path 
-                d="M0,120 C320,0 880,0 1200,120 H0 Z" 
-                className="fill-white"
-            ></path>
-        </svg>
-      </div>
     </section>
   );
 };

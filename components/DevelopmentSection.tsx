@@ -29,8 +29,12 @@ const ProjectCard = ({ title, description, url, image, tags }: { title: string, 
 
 export const DevelopmentSection: React.FC = () => {
   return (
-    <section id="development-section" className="py-24 px-4 bg-white relative border-t-2 border-black/5">
-      <div className="max-w-7xl mx-auto">
+    <section 
+      id="development-section" 
+      className="pt-32 pb-32 md:pb-48 px-4 bg-white relative overflow-hidden z-20 mt-[-60px] md:mt-[-120px]"
+      style={{ borderTopLeftRadius: '50% 60px', borderTopRightRadius: '50% 60px' }}
+    >
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <h2 className="text-4xl md:text-6xl font-display font-black text-black mb-4">

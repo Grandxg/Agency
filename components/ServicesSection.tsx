@@ -32,7 +32,10 @@ const ServiceCard = ({ icon: Icon, title, description, color }: { icon: any, tit
 
 export const ServicesSection: React.FC = () => {
   return (
-    <section className="py-24 px-4 bg-white relative overflow-visible z-20">
+    <section 
+      className="pt-32 pb-32 md:pb-48 px-4 bg-white relative overflow-hidden z-20 mt-[-60px] md:mt-[-120px]"
+      style={{ borderTopLeftRadius: '50% 60px', borderTopRightRadius: '50% 60px' }}
+    >
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Section Header */}
