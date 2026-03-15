@@ -12,52 +12,13 @@ export const InstagramCard = ({
   const reelId = match ? match[1] : '';
   const embedUrl = `https://www.instagram.com/reel/${reelId}/embed/?autoplay=0&muted=0`;
 
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const iframeRef = React.useRef<HTMLIFrameElement>(null);
-
-  React.useEffect(() => {
-    // 1. Reset (Pause) when out of view
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting && iframeRef.current) {
-          // Reload iframe to stop video
-          const currentSrc = iframeRef.current.src;
-          iframeRef.current.src = currentSrc;
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    // 2. Reset (Pause) when clicking any button or link
-    const handleGlobalClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if ((target.closest('button') || target.closest('a')) && iframeRef.current) {
-        const currentSrc = iframeRef.current.src;
-        iframeRef.current.src = currentSrc;
-      }
-    };
-
-    window.addEventListener('click', handleGlobalClick);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('click', handleGlobalClick);
-    };
-  }, []);
-
   return (
     <div 
-      ref={containerRef}
       className="group relative h-[750px] w-full min-w-[320px] max-w-[400px] shrink-0 rounded-3xl overflow-hidden border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col snap-center"
     >
       {/* Iframe Container */}
       <div className="flex-grow relative bg-black w-full overflow-hidden">
         <iframe 
-          ref={iframeRef}
           src={embedUrl}
           className="w-full h-[calc(100%+250px)] absolute top-0 left-0"
           frameBorder="0"
