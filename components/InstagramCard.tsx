@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 export const InstagramCard = ({ 
   url, 
@@ -12,12 +12,12 @@ export const InstagramCard = ({
   const reelId = match ? match[1] : '';
   const embedUrl = `https://www.instagram.com/reel/${reelId}/embed/?autoplay=0&muted=0`;
 
-  const iframeRef = React.useRef<HTMLIFrameElement>(null);
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let hasBeenVisible = false;
-    // 1. Pause (by reloading iframe) when out of view
+    // Pause (by reloading iframe) when out of view
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.intersectionRatio >= 0.5) {
@@ -45,23 +45,28 @@ export const InstagramCard = ({
   return (
     <div 
       ref={containerRef}
-      className="group relative h-[750px] w-full min-w-[320px] max-w-[400px] shrink-0 rounded-3xl overflow-hidden border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col snap-center"
+      className="group relative h-[750px] w-full min-w-[320px] max-w-[400px] shrink-0 rounded-3xl overflow-hidden border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-black transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col snap-center"
     >
       {/* Iframe Container */}
       <div className="flex-grow relative bg-black w-full overflow-hidden">
+        {/* We scale and shift the iframe to crop out the Instagram header and footer UI */}
         <iframe 
           ref={iframeRef}
           src={embedUrl}
-          className="w-full h-[calc(100%+250px)] absolute top-0 left-0"
+          className="w-[102%] h-[calc(100%+180px)] absolute top-[-90px] left-[-1%]"
           frameBorder="0"
           scrolling="no"
-          sandbox="allow-scripts allow-same-origin allow-presentation"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
           title={title}
         />
-        {/* Overlays to block redirects but allow center play click if needed */}
-        <div className="absolute top-0 left-0 w-full h-24 z-20 bg-transparent pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-full h-32 z-20 bg-transparent pointer-events-none" />
+        
+        {/* Custom Title Overlay */}
+        <div className="absolute top-0 left-0 w-full h-24 z-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none flex items-start p-6">
+            <h3 className="text-white font-display font-bold text-2xl drop-shadow-md">{title}</h3>
+        </div>
+        
+        {/* Bottom gradient overlay to hide any remaining IG UI */}
+        <div className="absolute bottom-0 left-0 w-full h-24 z-20 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
       </div>
     </div>
   );

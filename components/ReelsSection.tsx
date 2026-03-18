@@ -8,13 +8,17 @@ export const ReelsSection: React.FC = () => {
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+      const child = scrollContainerRef.current.firstElementChild as HTMLElement;
+      const scrollAmount = child ? child.offsetWidth + 32 : 400; // 32px is the gap-8
+      scrollContainerRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+      const child = scrollContainerRef.current.firstElementChild as HTMLElement;
+      const scrollAmount = child ? child.offsetWidth + 32 : 400;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
 
@@ -43,8 +47,9 @@ export const ReelsSection: React.FC = () => {
             {/* Left Navigation Arrow */}
             <button 
               onClick={scrollLeft}
-              className="flex absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-50 bg-white border-[3px] border-black rounded-full p-2 md:p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-[calc(50%+4px)] hover:shadow-[0_0_20px_rgba(168,85,247,0.8),_4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_30px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:-translate-y-1/2 active:translate-x-1 focus:outline-none focus:shadow-[0_0_30px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)] focus:border-[#9333ea]"
+              className="flex absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-50 bg-white border-[3px] border-black rounded-full p-2 md:p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 md:hover:-translate-y-[calc(50%+4px)] md:hover:shadow-[0_0_20px_rgba(168,85,247,0.8),_4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_30px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:-translate-y-1/2 active:translate-x-1 focus:outline-none focus:shadow-[0_0_30px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)] focus:border-[#9333ea]"
               aria-label="Scroll left"
+              type="button"
             >
               <ChevronLeft size={32} className="text-black" />
             </button>
@@ -52,8 +57,9 @@ export const ReelsSection: React.FC = () => {
             {/* Right Navigation Arrow */}
             <button 
               onClick={scrollRight}
-              className="flex absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-50 bg-white border-[3px] border-black rounded-full p-2 md:p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-[calc(50%+4px)] hover:shadow-[0_0_20px_rgba(168,85,247,0.8),_4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_30px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:-translate-y-1/2 active:-translate-x-1 focus:outline-none focus:shadow-[0_0_30px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)] focus:border-[#9333ea]"
+              className="flex absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-50 bg-white border-[3px] border-black rounded-full p-2 md:p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 md:hover:-translate-y-[calc(50%+4px)] md:hover:shadow-[0_0_20px_rgba(168,85,247,0.8),_4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0_0_30px_rgba(168,85,247,1),_0px_0px_0px_0px_rgba(0,0,0,1)] active:-translate-y-1/2 active:-translate-x-1 focus:outline-none focus:shadow-[0_0_30px_rgba(168,85,247,1),_4px_4px_0px_0px_rgba(0,0,0,1)] focus:border-[#9333ea]"
               aria-label="Scroll right"
+              type="button"
             >
               <ChevronRight size={32} className="text-black" />
             </button>
