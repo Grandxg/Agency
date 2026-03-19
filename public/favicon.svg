@@ -1,10 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Purple G -->
-  <path d="M 74.7 25.3 A 35 35 0 1 0 85 50 H 55" fill="none" stroke="#2E0249" stroke-width="20" stroke-linecap="butt" />
-
-  <!-- White cutout for Arrow -->
-  <path d="M 15 70 Q 40 80 68 38 L 75 45 L 75 25 L 55 25 L 62 32 Q 35 70 15 60 Z" fill="white" stroke="white" stroke-width="6" stroke-linejoin="round" />
-
-  <!-- Green Arrow -->
-  <path d="M 15 70 Q 40 80 68 38 L 75 45 L 75 25 L 55 25 L 62 32 Q 35 70 15 60 Z" fill="#22C55E" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Purple G Background -->
+  <path d="M256 48C141.1 48 48 141.1 48 256s93.1 208 208 208c114.9 0 208-93.1 208-208S370.9 48 256 48zm0 368c-88.4 0-160-71.6-160-160S167.6 96 256 96c38.7 0 74.3 13.8 101.8 36.9l-35.4 35.4c-17.6-14.2-40.1-22.8-66.4-22.8-57.4 0-104 46.6-104 104s46.6 104 104 104c49.6 0 91.1-34.9 101.3-81.1H256v-50.7h156.4c1.6 8.2 2.4 16.8 2.4 25.8 0 91.5-74.5 165.9-158.8 165.9z" fill="#2E0249"/>
+  
+  <!-- Green Arrow Overlay -->
+  <path d="M150 350 C 200 350, 250 300, 320 200 L 280 200 L 360 120 L 360 200 L 340 200 C 280 300, 200 380, 150 380 Z" fill="#22C55E" stroke="white" stroke-width="15" stroke-linejoin="round"/>
 </svg>
