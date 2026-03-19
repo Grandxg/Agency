@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Purple G -->
+  <path d="M 74.7 25.3 A 35 35 0 1 0 85 50 H 55" fill="none" stroke="#2E0249" stroke-width="20" stroke-linecap="butt" />
+
+  <!-- White cutout for Arrow -->
+  <path d="M 15 70 Q 40 80 68 38 L 75 45 L 75 25 L 55 25 L 62 32 Q 35 70 15 60 Z" fill="white" stroke="white" stroke-width="6" stroke-linejoin="round" />
+
+  <!-- Green Arrow -->
+  <path d="M 15 70 Q 40 80 68 38 L 75 45 L 75 25 L 55 25 L 62 32 Q 35 70 15 60 Z" fill="#22C55E" />
+</svg>
