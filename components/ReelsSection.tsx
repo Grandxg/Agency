@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { InstagramCard } from './InstagramCard';
 import { YouTubeCard } from './YouTubeCard';
+import { VideoCard } from './VideoCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const ReelsSection: React.FC = () => {
@@ -71,6 +72,12 @@ export const ReelsSection: React.FC = () => {
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 
+                {/* Uploaded Video Reel */}
+                <VideoCard 
+                    title="Real Estate Reel"
+                    src="/real-estate-reel.mp4"
+                />
+
                 {/* YouTube Short 1 */}
                 <YouTubeCard 
                     title="Viral Short 1"
