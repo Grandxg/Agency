@@ -12,11 +12,14 @@ export const VideoCard = ({
 
   useEffect(() => {
     let hasBeenVisible = false;
-    // Pause when out of view
+    // Play when in view, pause when out of view
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.intersectionRatio >= 0.5) {
           hasBeenVisible = true;
+          videoRef.current?.play().catch(() => {
+            // Ignore autoplay errors if user hasn't interacted
+          });
         } else if (hasBeenVisible && entry.intersectionRatio < 0.5) {
           videoRef.current?.pause();
           hasBeenVisible = false;
@@ -48,7 +51,8 @@ export const VideoCard = ({
           playsInline
           loop
           muted
-          preload="metadata"
+          autoPlay
+          preload="auto"
           title={title}
         />
         
