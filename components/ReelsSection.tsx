@@ -75,7 +75,7 @@ export const ReelsSection: React.FC = () => {
                 {/* Uploaded Video Reel */}
                 <VideoCard 
                     title="Real Estate Reel"
-                    src="https://raw.githubusercontent.com/Grandxg/Agency/main/public/real-estate-reel.mp4"
+                    src="https://cdn.jsdelivr.net/gh/Grandxg/Agency@main/public/real-estate-reel.mp4"
                 />
 
                 {/* YouTube Short 1 */}

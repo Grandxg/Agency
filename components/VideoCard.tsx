@@ -47,6 +47,8 @@ export const VideoCard = ({
           controls
           playsInline
           loop
+          muted
+          preload="metadata"
           title={title}
         />
         
