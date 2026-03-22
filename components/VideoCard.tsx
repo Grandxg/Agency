@@ -8,38 +8,22 @@ export const VideoCard = ({
   title: string;
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let hasBeenVisible = false;
-    // Play when in view, pause when out of view
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.intersectionRatio >= 0.5) {
-          hasBeenVisible = true;
-          videoRef.current?.play().catch(() => {
-            // Ignore autoplay errors if user hasn't interacted
-          });
-        } else if (hasBeenVisible && entry.intersectionRatio < 0.5) {
-          videoRef.current?.pause();
-          hasBeenVisible = false;
-        }
-      },
-      { threshold: [0.5] } // Trigger when crossing 50% visibility
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    // iOS Safari requires explicit muted state via JS sometimes to allow autoplay
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      
+      // Attempt to play immediately on mount as a fallback
+      videoRef.current.play().catch((err) => {
+        console.log("Autoplay prevented by browser:", err);
+      });
     }
-
-    return () => {
-      observer.disconnect();
-    };
   }, []);
 
   return (
     <div 
-      ref={containerRef}
       className="group relative h-[750px] w-full min-w-[320px] max-w-[400px] shrink-0 rounded-3xl overflow-hidden border-[3px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-black transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col snap-center"
     >
       <div className="flex-grow relative bg-black w-full overflow-hidden">
