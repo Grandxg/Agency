@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from './ui/Button';
 import { Input } from './ui/Input';
-import { submitToWaitlist } from '../services/api';
 
 export const WaitlistForm: React.FC = () => {
   const [formData, setFormData] = useState({
